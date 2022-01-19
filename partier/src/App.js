@@ -1,10 +1,12 @@
 import NavigationBar from './components/layout/NavigationBar';
 import {Route, Routes} from "react-router-dom";
+
 import Theater from "./pages/Theater";
 import Restaurants from "./pages/Restaurants";
 import Bars from "./pages/Bars";
 import Homepage from "./pages/Homepage";
 import Services from "./pages/Services";
+
 
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
                 <Route path="/bars" element={<Bars />} exact/>
                 <Route path="/services" element={<Services />} exact/>
             </Routes>
+
         </div>
     );
 }
