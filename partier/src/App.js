@@ -1,12 +1,15 @@
 import NavigationBar from './components/layout/NavigationBar';
+import {Route, Routes} from "react-router-dom";
+import AllEventsPage from "./pages/AllEvents";
+
 
 function App() {
     return (
         <div>
             <NavigationBar/>
-            <div>
-                <h1>Partier</h1>
-            </div>
+            <Routes>
+                <Route path='/' element={<AllEventsPage/>}/>
+            </Routes>
 
         </div>
     );
