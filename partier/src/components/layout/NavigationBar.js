@@ -1,16 +1,22 @@
 import { Link } from 'react-router-dom';
-import classes from './NavigationBar.module.css';
 
 function NavigationBar() {
     return (
-        <header className={classes.header}>
-            <div className={classes.logo}>React Meetups</div>
-            <nav>
-                <ul>
-                    {/*<li><Link to='/'>All Meetups</Link></li>*/}
-                    {/*<li><Link to='/new-meetup'>New Meetup</Link></li>*/}
-                    {/*<li><Link to='/favorites'>Favorites</Link></li>*/}
-                </ul>
+        <header>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-primary header-nav">
+                <Link className="navbar-brand" to='/'><h1>Partier</h1></Link>
+                <button className="btn-primary btn-lg nav-link">
+                    <Link className="navbar-brand" to='/theater'>Theater</Link>
+                </button>
+                <button className="btn-primary btn-lg nav-link">
+                    <Link className="navbar-brand" to='/restaurants'>Restaurants</Link>
+                </button>
+                <button className="btn-primary btn-lg nav-link">
+                    <Link className="navbar-brand" to='/bars'>Bars</Link>
+                </button>
+                <button className="btn-primary btn-lg nav-link">
+                    <Link className="navbar-brand" to='/services'>Services</Link>
+                </button>
             </nav>
         </header>
     )
