@@ -4,18 +4,19 @@ import { useNavigate } from "react-router-dom";
 function MeetupItem(props) {
     const navigate = useNavigate();
     return (
-        <li className={classes.item} onClick={() => navigate(`/event/${props.id}`)}>
-            <div className={classes.image}>
+        <li className={classes.item}>
+            <div className={classes.image}  onClick={() => navigate(`/event/${props.id}`)}>
                 <img src={props.image} alt={props.title}/>
             </div>
-            <div className={classes.content}>
+            <div className={classes.content} onClick={() => navigate(`/event/${props.id}`)}>
                 <h3>{props.title}</h3>
                 <address>{props.location}</address>
                 <p>{truncateWithEllipses(props.description, 200).toUpperCase()}</p>
-                <div className={classes.actions}>
-                    <button>To Favorites</button>
-                    <button>Buy Ticket</button>
-                </div>
+
+            </div>
+            <div className={classes.actions}>
+                <button>To Favorites</button>
+                <button>Buy Ticket</button>
             </div>
         </li>
     );

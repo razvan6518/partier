@@ -21,6 +21,7 @@ function EventPage(props) {
             </div>
             <div className={classes.content}>
                 <h3>{event.title}</h3>
+                <p>{event.start_date}</p>
                 <address>{event.location}</address>
                 <p>{event.description}</p>
                 <div className={classes.actions}>

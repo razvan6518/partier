@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: space-between;
     background-color: #77002e;
-    padding: 0 10%;
+    padding: 0;
 }
 
 .logo {
@@ -46,4 +46,9 @@
     border-radius: 12px;
     padding: 0 1rem;
     margin-left: 0.5rem;
+}
+
+.button {
+    background-color: transparent;
+
 }
