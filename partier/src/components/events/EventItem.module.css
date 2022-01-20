@@ -1,6 +1,9 @@
 .item {
-    margin: 1rem 0;
-    background: moccasin;
+    margin: 2rem 25%;
+    background: #ffffff;
+    border-radius: 6px;
+    color: gray;
+    box-shadow: 5px 5px 10px;
 }
 
 .image {
@@ -18,17 +21,9 @@
 }
 
 .content {
+    padding: 10px;
     text-align: center;
-    padding: 0 10rem;
 }
-
-.content p {
-    /*line-height: 1.2em;*/
-    /*height: 3.6em;*/
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 
 
 .content h3 {
