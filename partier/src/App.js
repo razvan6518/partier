@@ -4,8 +4,9 @@ import {Route, Routes} from "react-router-dom";
 import Theater from "./pages/Theater";
 import Restaurants from "./pages/Restaurants";
 import Bars from "./pages/Bars";
-import Homepage from "./pages/Homepage";
+import AllEvents from "./pages/AllEvents";
 import Services from "./pages/Services";
+import FooterPage from "./components/layout/Footer";
 
 
 
@@ -14,13 +15,13 @@ function App() {
         <div>
             <NavigationBar/>
             <Routes>
-                <Route path="/" element={<Homepage />} exact/>
+                <Route path="/" element={<AllEvents />} exact/>
                 <Route path="/theater" element={<Theater />} exact/>
                 <Route path="/restaurants" element={<Restaurants />} exact/>
                 <Route path="/bars" element={<Bars />} exact/>
                 <Route path="/services" element={<Services />} exact/>
             </Routes>
-
+            <FooterPage/>
         </div>
     );
 }
