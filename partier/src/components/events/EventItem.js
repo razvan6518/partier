@@ -1,8 +1,10 @@
 import classes from './EventItem.module.css';
+import { useNavigate } from "react-router-dom";
 
 function MeetupItem(props) {
+    const navigate = useNavigate();
     return (
-        <li className={classes.item}>
+        <li className={classes.item} onClick={() => navigate(`/event/${props.id}`)}>
             <div className={classes.image}>
                 <img src={props.image} alt={props.title}/>
             </div>
