@@ -30,9 +30,7 @@ function FooterPage() {
                         </div>
                         <div className="col-md-6 item text">
                             <h3 className={classes.titles}>Partier</h3>
-                            <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut
-                                vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit
-                                pulvinar dictum vel in justo.</p>
+                            <p>Partier is an online platform for concerts, festivals, parties and much more. </p>
                         </div>
                         <div className="col item social"><a href="#"><i className="icon ion-social-facebook"></i></a><a
                             href="#"><i className="icon ion-social-twitter"></i></a><a href="#"><i
