@@ -24,9 +24,8 @@ build/
 .vscode/
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+partierReact/node_modules
+
 # testing
 /coverage
 
