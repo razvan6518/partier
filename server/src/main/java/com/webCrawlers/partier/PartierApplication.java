@@ -10,6 +10,6 @@ public class PartierApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(PartierApplication.class, args);
-		ctx.getBean(EventCreator.class).initialize();
+//		ctx.getBean(EventCreator.class).initialize();
 	}
 }

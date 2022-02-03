@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 function MeetupItem(props) {
     const navigate = useNavigate();
+    console.log(props);
     return (
         <li className={classes.item}>
-            <div className={classes.image}  onClick={() => navigate(`/event/${props.id}`)}>
+            <div className={classes.image}  onClick={() => navigate(`/event/${props.id}`,{myJSON: props})}>
                 <img src={props.image} alt={props.title}/>
             </div>
             <div className={classes.content} onClick={() => navigate(`/event/${props.id}`)}>

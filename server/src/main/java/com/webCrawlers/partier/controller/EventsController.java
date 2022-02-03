@@ -19,7 +19,8 @@ public class EventsController {
     }
 
     @GetMapping("/{id}")
-    public Event getEvent(@PathVariable int id) {
+    @CrossOrigin(origins = "http://localhost:3000")
+    public Event getEvent(@PathVariable Long id) {
         return eventService.getEvent(id);
     }
 
@@ -27,6 +28,12 @@ public class EventsController {
     @CrossOrigin(origins = "http://localhost:3000")
     public Set<Event> getAllEvents() {
         return eventService.getAllEvents();
+    }
+
+    @PostMapping
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void addEvent(@RequestBody Event event) {
+        eventService.addEvent(event);
     }
 
 }

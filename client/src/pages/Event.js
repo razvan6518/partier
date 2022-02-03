@@ -1,29 +1,43 @@
+import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import classes from "./Event.module.css";
 
 function EventPage() {
     const params = useParams();
-    let event = null;
-    getEvents().forEach((ev) => {
-        console.log(ev.id);
 
-        if (ev.id.toString() === params.eventId.toString()) {
-            console.log("ok");
-            event = ev;
-        }
-        console.log("no");
-    })
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadedEvent, setLoadedEvent] = useState("");
+
+    useEffect(async () => {
+        setIsLoading(true);
+        fetch(
+            `http://localhost:5000/events/${params.eventId}`
+        ).then(response => {
+            return response.json();
+        }).then(data => {
+            setIsLoading(false);
+            setLoadedEvent(data);
+        });
+    }, []);
+
+    if (isLoading) {
+        return (
+            <section>
+                <p>Loading...</p>
+            </section>
+        );
+    }
 
     return (
         <div className={classes.card}>
             <div className={classes.image}>
-                <img src={event.image} alt={event.title}/>
+                <img src={loadedEvent.image} alt={loadedEvent.title}/>
             </div>
             <div className={classes.content}>
-                <h3>{event.title}</h3>
-                <p>{event.start_date}</p>
-                <address>{event.location}</address>
-                <p>{event.description}</p>
+                <h3>{loadedEvent.title}</h3>
+                <p>{loadedEvent.start_date}</p>
+                <address>{loadedEvent.location}</address>
+                <p>{loadedEvent.description}</p>
                 <div className={classes.actions}>
                     <button>To Favorites</button>
                     <button>Buy Ticket</button>
@@ -31,10 +45,13 @@ function EventPage() {
             </div>
         </div>
     );
+
 }
 
-function getEvents() {
-    return require('../resources/events_dummy.json');
+async function getEvents(id) {
+    const response = await fetch("http://localhost:5000/" + id);
+    const event = await response.json();
+    return event;
 }
 
 export default EventPage;

@@ -3,7 +3,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target
-../package-lock.json
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -40,3 +39,4 @@ client/node_modules
 .env.production.local
 
 
+/package-lock.json

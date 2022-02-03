@@ -1,27 +1,34 @@
 package com.webCrawlers.partier.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import java.util.Set;
+import javax.persistence.*;
+import java.util.Objects;
 
-@Data
-@Builder
 @Getter
 @Setter
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Event {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String title;
+    @Column(
+            length = 2000
+    )
     private String description;
     private String location;
     private String startDate;
     private String endDate;
     private String image;
     private String category;
-    private Set<String> artists;
+
+//    private Set<String> artists;
 
 }

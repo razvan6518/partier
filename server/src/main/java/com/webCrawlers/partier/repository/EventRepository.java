@@ -1,7 +1,9 @@
-package com.codecool.hogwarts_potions.model;
+package com.webCrawlers.partier.repository;
 
+
+import com.webCrawlers.partier.model.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PotionRepository extends JpaRepository<Potion, Long> {
+public interface EventRepository extends JpaRepository<Event, Long> {
 
 }
