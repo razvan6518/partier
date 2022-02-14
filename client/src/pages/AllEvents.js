@@ -6,10 +6,27 @@ function AllEventsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [loadedEvents, setLoadedEvents] = useState([]);
 
-    useEffect(async () => {
+    useEffect(() => {
         setIsLoading(true);
+
+        const myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
+
+        sessionStorage.getItem("token");
+
+        const requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        // fetch("http://localhost:5000/events", requestOptions)
+        //     .then(response => response.text())
+        //     .then(result => console.log(result))
+        //     .catch(error => console.log('error', error));
+
         fetch(
-            "http://localhost:5000/events"
+            "http://localhost:5000/events", requestOptions
         ).then(response => {
             return response.json();
         }).then(data => {
