@@ -40,3 +40,4 @@ client/node_modules
 
 
 /package-lock.json
+server/src/main/resources/application.properties
