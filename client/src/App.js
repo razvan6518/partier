@@ -8,6 +8,8 @@ import AllEvents from "./pages/AllEvents";
 import Services from "./pages/Services";
 import FooterPage from "./components/layout/Footer";
 import Event from "./pages/Event";
+import LoginPage from "./pages/Login";
+import RegisterPage from "./pages/Register";
 
 function App() {
     return (
@@ -18,8 +20,8 @@ function App() {
                 <Route path="/event/:eventId" element={<Event/>} exact/>
                 <Route path="/theater" element={<Theater/>} exact/>
                 <Route path="/restaurants" element={<Restaurants/>} exact/>
-                <Route path="/bars" element={<Bars/>} exact/>
-                <Route path="/services" element={<Services/>} exact/>
+                <Route path="/register" element={<RegisterPage/>} exact/>
+                <Route path="/login" element={<LoginPage/>} exact/>
             </Routes>
             <FooterPage/>
         </div>
