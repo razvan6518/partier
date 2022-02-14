@@ -22,9 +22,8 @@ function LoginPage() {
         fetch("http://localhost:5000/login", requestOptions)
             .then(response => response.text())
             .then(result => {
-                console.log(">>>>"+ result)
-                console.log("----" + result?.access_token);
-                localStorage.setItem("token", result.access_token);
+                result = JSON.parse(result);
+                window.localStorage.setItem("token", result.access_token);
             })
             .catch(error => {
                     console.log('error', error)

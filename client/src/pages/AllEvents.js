@@ -10,7 +10,7 @@ function AllEventsPage() {
         setIsLoading(true);
 
         const myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
+        myHeaders.append("Authorization", "Bearer " + localStorage.getItem("token"));
 
         sessionStorage.getItem("token");
 
