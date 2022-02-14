@@ -9,6 +9,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/events")
+@CrossOrigin(origins = "http://localhost:3000")
 public class EventsController {
 
     EventService eventService;
@@ -19,19 +20,19 @@ public class EventsController {
     }
 
     @GetMapping("/{id}")
-    @CrossOrigin(origins = "http://localhost:3000")
+//    @CrossOrigin(origins = "http://localhost:3000")
     public Event getEvent(@PathVariable Long id) {
         return eventService.getEvent(id);
     }
 
     @GetMapping
-    @CrossOrigin(origins = "http://localhost:3000")
+//    @CrossOrigin(origins = "http://localhost:3000")
     public Set<Event> getAllEvents() {
         return eventService.getAllEvents();
     }
 
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:3000")
+//    @CrossOrigin(origins = "http://localhost:3000")
     public void addEvent(@RequestBody Event event) {
         eventService.addEvent(event);
     }
