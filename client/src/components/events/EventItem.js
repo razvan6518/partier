@@ -25,5 +25,8 @@ function MeetupItem(props) {
 export default MeetupItem;
 
 function truncateWithEllipses(text, max) {
+    if (text === null) {
+        return "";
+    }
     return text.substr(0, max - 1) + (text.length > max ? '...' : '');
 }
