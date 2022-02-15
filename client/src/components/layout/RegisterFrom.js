@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useRef} from "react";
 import Card from "../ui/Card";
 import classes from "./LoginFrom.module.css";
 import DatePicker from "react-datepicker";
@@ -65,6 +65,14 @@ function RegisterForm(props) {
             </div>
             <div className={classes.control}>
                 <label htmlFor="repeatPassword">Repeat Password</label>
+                <input type="Password" required id="repeatPassword" ref={repeatPasswordInputRef}/>
+            </div>
+            <div className={classes.control}>
+                <label htmlFor="role">Choose a role:</label>
+                <select name="role" id="role">
+                    <option value="ROLE_USE">User</option>
+                    <option value="ROLE_ORGANISER">Organiser</option>
+                </select>
                 <input type="Password" required id="repeatPassword" onChange={event => setRepeatPassword(event.target.value)}/>
             </div>
             <div className={classes.actions}>

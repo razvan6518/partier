@@ -10,16 +10,18 @@ function RegisterPage() {
             console.log("passwords dont match");
             return;
         }
-        const myHeaders = new Headers();
+        let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        const raw = JSON.stringify({
+        let role = user.role;
+
+        let raw = JSON.stringify({
             "email": user.email,
             "username": user.username,
             "password": user.password
         });
 
-        const requestOptions = {
+        let requestOptions = {
             method: 'POST',
             headers: myHeaders,
             body: raw,
@@ -27,6 +29,26 @@ function RegisterPage() {
         };
 
         fetch("http://localhost:5000/api/user/save", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+        myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        raw = JSON.stringify({
+            "username": user.username,
+            "roleName": role
+        });
+
+        requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:5000/api/role/addtouser", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
