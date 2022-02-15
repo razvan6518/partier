@@ -17,19 +17,19 @@ function RegisterForm(props) {
     const [birthdate, setBirthdate] = useState(new Date());
     const [address, setAddress] = useState("");
     const [username, setUsername] = useState("");
-    const [role, setRole] = useState();
+    const [role, setRole] = useState("ROLE_USER");
 
-    function checkRepeatPassword(){
-        const repeatPass = repeatPassword;
-        const pass = password;
-        if (repeatPass !== pass){
-            document.querySelector("#repeatPassword").classList.add("alert");
-            console.log("diferite")
-        }else{
-            document.querySelector("#repeatPassword").className = "";
-            console.log("identice")
+    (function () {
+        if (password !== "" && repeatPassword !== "") {
+            if (password !== repeatPassword) {
+                console.log("no match");
+                document.querySelector(".passwd input").style.border = "#77002e";
+            } else {
+                document.querySelector(".passwd input").style.border = "#111";
+                console.log("match");
+            }
         }
-    }
+    }) ();
 
     function submitHandler(user) {
         user.preventDefault();
@@ -73,13 +73,13 @@ function RegisterForm(props) {
                 <label htmlFor="address">Address</label>
                 <input type="address" required id="address" onChange={event => setAddress(event.target.value)}/>
             </div>
-            <div className={classes.control}>
+            <div className={classes.control} >
                 <label htmlFor="password">Password</label>
                 <input type="password" required id="password" onChange={event => setPassword(event.target.value)}/>
             </div>
-            <div className={classes.control}>
+            <div className={classes.control + " " + "passwd"}>
                 <label htmlFor="repeatPassword">Repeat Password</label>
-                <input type="Password" required id="repeatPassword" onChange={event => {setPassword(event.target.value); checkRepeatPassword()}}/>
+                <input type="password" required id="repeatPassword" onChange={event => setRepeatPassword(event.target.value)}/>
             </div>
             <div className={classes.control}>
                 <label htmlFor="role">Choose a role:</label>
