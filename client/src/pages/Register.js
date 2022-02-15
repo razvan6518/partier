@@ -13,12 +13,16 @@ function RegisterPage() {
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
+        const date = user.birthdate;
+        const now_utc =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
+            date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()).toString();
+
         let raw = JSON.stringify({
             "email": user.email,
             "username": user.username,
             "firstName": user.firstName,
             "lastName": user.lastName,
-            "birthdate": user.birthdate,
+            "birthdate": now_utc,
             "address": user.address,
             "password": user.password
         });

@@ -5,9 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
 public class AppUser {
@@ -19,7 +19,7 @@ public class AppUser {
     private String firstName;
     private String lastName;
     private String address;
-    private Date dateOfBirth;
+    private String birthdate;
     private String profilePhoto;
     private String password;
     @ManyToMany

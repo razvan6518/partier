@@ -79,7 +79,7 @@ function RegisterForm(props) {
             </div>
             <div className={classes.control}>
                 <label htmlFor="repeatPassword">Repeat Password</label>
-                <input type="Password" required id="repeatPassword" onChange={event => {setPassword(event.target.value); checkRepeatPassword()}}/>
+                <input type="Password" required id="repeatPassword" onChange={event => {setRepeatPassword(event.target.value); checkRepeatPassword()}}/>
             </div>
             <div className={classes.control}>
                 <label htmlFor="role">Choose a role:</label>
