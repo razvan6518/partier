@@ -7,6 +7,7 @@ function RegisterForm(props) {
     const passwordInputRef = useRef();
     const emailInputRef = useRef();
     const repeatPasswordInputRef = useRef();
+    const roleInputRef = useRef();
 
     function submitHandler(user) {
         user.preventDefault();
@@ -15,8 +16,15 @@ function RegisterForm(props) {
         const enteredPassword = passwordInputRef.current.value;
         const enteredEmail = emailInputRef.current.value;
         const enteredRepeatPassword = passwordInputRef.current.value;
+        const enteredRole = roleInputRef.current.value;
 
-        const userItem = {"username": enteredUsername, "email": enteredEmail, "password": enteredPassword, "repeatedPassword": enteredRepeatPassword};
+        const userItem = {
+            "username": enteredUsername,
+            "email": enteredEmail,
+            "password": enteredPassword,
+            "repeatedPassword": enteredRepeatPassword,
+            "role": enteredRole
+        };
 
         props.onRegisterUser(userItem);
     }
@@ -38,6 +46,13 @@ function RegisterForm(props) {
             <div className={classes.control}>
                 <label htmlFor="repeatPassword">Repeat Password</label>
                 <input type="Password" required id="repeatPassword" ref={repeatPasswordInputRef}/>
+            </div>
+            <div className={classes.control}>
+                <label htmlFor="role">Choose a role:</label>
+                <select name="role" id="role">
+                    <option value="ROLE_USE">User</option>
+                    <option value="ROLE_ORGANISER">Organiser</option>
+                </select>
             </div>
             <div className={classes.actions}>
                 <button>Login</button>

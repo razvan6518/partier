@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -18,7 +19,7 @@ public class AppUser {
     private String firstName;
     private String lastName;
     private String address;
-    private String dateOfBirth;
+    private Date dateOfBirth;
     private String profilePhoto;
     private String password;
     @ManyToMany
