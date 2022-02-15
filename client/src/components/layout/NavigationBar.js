@@ -16,10 +16,10 @@ function NavigationBar() {
                         <Link to='/restaurants'>Restaurants</Link>
                     </li>
                     <li>
-                        <Link to='/bars'>Bars</Link>
+                        <Link to='/register'>Register</Link>
                     </li>
                     <li>
-                        <Link to='/services'>Services</Link>
+                        <Link to='/login'>Login</Link>
                     </li>
                 </ul>
             </nav>

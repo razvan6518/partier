@@ -9,6 +9,7 @@ function AllEventsPage() {
     useEffect(() => {
         setIsLoading(true);
 
+
         const myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer " + localStorage.getItem("token"));
 

@@ -50,6 +50,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
         AppUser appUser = userRepo.findByUsername(username);
         Role role = roleRepo.findByName(roleName);
         appUser.getRoles().add(role);
+
     }
 
     @Override

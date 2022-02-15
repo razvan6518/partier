@@ -5,9 +5,13 @@ import classes from "./Event.module.css";
 function EventPage() {
     const params = useParams();
 
+    if (localStorage.getItem("token") == null){
+        window.location.replace("/login");
+    }
+
     const [isLoading, setIsLoading] = useState(true);
     const [loadedEvent, setLoadedEvent] = useState("");
-
+        console.log(localStorage.getItem("token"));
     useEffect(async () => {
         setIsLoading(true);
         fetch(

@@ -59,12 +59,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         });
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers(GET, "/login").permitAll();
+//        http.authorizeRequests().antMatchers(GET, "/").permitAll();
 //        http.authorizeRequests().antMatchers(GET, "/events/**").authenticated();
         http.authorizeRequests().anyRequest().permitAll();
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.formLogin().loginPage("/login");
+        http.formLogin();
 
 //        http
 //                .authorizeRequests()

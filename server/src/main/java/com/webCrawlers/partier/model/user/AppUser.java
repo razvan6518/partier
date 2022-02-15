@@ -13,8 +13,13 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String email;
     private String username;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String dateOfBirth;
+    private String profilePhoto;
     private String password;
     @ManyToMany
     private Collection<Role> roles = new ArrayList<>();
