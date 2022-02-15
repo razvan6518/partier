@@ -13,11 +13,13 @@ function RegisterPage() {
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        let role = user.role;
-
         let raw = JSON.stringify({
             "email": user.email,
             "username": user.username,
+            "firstName": user.firstName,
+            "lastName": user.lastName,
+            "birthdate": user.birthdate,
+            "address": user.address,
             "password": user.password
         });
 
@@ -38,7 +40,7 @@ function RegisterPage() {
 
         raw = JSON.stringify({
             "username": user.username,
-            "roleName": role
+            "roleName": user.role
         });
 
         requestOptions = {
