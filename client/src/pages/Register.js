@@ -3,7 +3,7 @@ import RegisterForm from "../components/layout/RegisterFrom";
 
 function RegisterPage() {
 
-    function RegisterHandler(user) {
+    async function RegisterHandler(user) {
         console.log("reg user: ", user);
 
         if (user.password !== user.repeatedPassword) {
@@ -24,7 +24,8 @@ function RegisterPage() {
             "lastName": user.lastName,
             "birthdate": now_utc,
             "address": user.address,
-            "password": user.password
+            "password": user.password,
+            "roles": [user.role]
         });
 
         let requestOptions = {
@@ -39,25 +40,6 @@ function RegisterPage() {
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
 
-        myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        raw = JSON.stringify({
-            "username": user.username,
-            "roleName": user.role
-        });
-
-        requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch("http://localhost:5000/api/role/addtouser", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
     }
 
     return (<section>

@@ -10,6 +10,7 @@ import FooterPage from "./components/layout/Footer";
 import Event from "./pages/Event";
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
+import AddEvent from "./pages/AddEvent";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/restaurants" element={<Restaurants/>} exact/>
                 <Route path="/register" element={<RegisterPage/>} exact/>
                 <Route path="/login" element={<LoginPage/>} exact/>
+                <Route path="/add-event" element={<AddEvent/>} exact/>
             </Routes>
             <FooterPage/>
         </div>

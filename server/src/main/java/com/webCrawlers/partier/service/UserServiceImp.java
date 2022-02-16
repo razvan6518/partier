@@ -30,7 +30,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser user = userRepo.findByUsername(username);
         Collection<SimpleGrantedAuthority> roles = new ArrayList<>();
-        user.getRoles().forEach(role -> roles.add(new SimpleGrantedAuthority(role.getName())));
+        user.getRoles().forEach(role -> roles.add(new SimpleGrantedAuthority(role)));
         return new User(user.getUsername(), user.getPassword(), roles);
     }
 
@@ -45,13 +45,13 @@ public class UserServiceImp implements UserService, UserDetailsService {
         return roleRepo.save(role);
     }
 
-    @Override
-    public void addRoleToUser(String username, String roleName) {
-        AppUser appUser = userRepo.findByUsername(username);
-        Role role = roleRepo.findByName(roleName);
-        appUser.getRoles().add(role);
+//    @Override
+//    public void addRoleToUser(String username, String roleName) {
+//        AppUser appUser = userRepo.findByUsername(username);
+//        Role role = roleRepo.findByName(roleName);
+//        appUser.getRoles().add(role);
 
-    }
+//    }
 
     @Override
     public AppUser getUser(String username) {
