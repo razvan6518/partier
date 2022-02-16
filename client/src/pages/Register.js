@@ -37,7 +37,10 @@ function RegisterPage() {
 
         fetch("http://localhost:5000/api/user/save", requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => {
+                console.log(result)
+                window.location.href = '/';
+            })
             .catch(error => console.log('error', error));
 
     }

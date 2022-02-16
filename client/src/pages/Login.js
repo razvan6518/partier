@@ -24,6 +24,7 @@ function LoginPage() {
             .then(result => {
                 result = JSON.parse(result);
                 window.localStorage.setItem("token", result.access_token);
+                window.location.href = '/';
             })
             .catch(error => {
                     console.log('error', error)

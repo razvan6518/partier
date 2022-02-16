@@ -1,7 +1,6 @@
-import {useRef} from "react";
+import {useState} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {useState} from "react";
 
 import Card from "../ui/Card";
 import classes from "./LoginFrom.module.css";
@@ -19,14 +18,16 @@ function RegisterForm(props) {
     const [username, setUsername] = useState("");
     const [role, setRole] = useState();
 
+
     function checkRepeatPassword(){
-        const repeatPass = repeatPassword;
-        const pass = password;
-        if (repeatPass !== pass){
-            document.querySelector("#repeatPassword").classList.add("alert");
+        const repeatPassword = document.querySelector("#repeatPassword").value;
+        const password = document.querySelector("#password").value;
+        const button = document. querySelector('#registerButton');
+        if (repeatPassword !== password){
+            button.disabled = true;
             console.log("diferite")
         }else{
-            document.querySelector("#repeatPassword").className = "";
+            button.disabled = false;
             console.log("identice")
         }
     }
@@ -84,12 +85,12 @@ function RegisterForm(props) {
             <div className={classes.control}>
                 <label htmlFor="role">Choose a role:</label>
                 <select name="role" id="role" onChange={event => setRole(event.target.value)}>
-                    <option value="ROLE_USE">User</option>
+                    <option value="ROLE_USER">User</option>
                     <option value="ROLE_ORGANISER">Organiser</option>
                 </select>
             </div>
             <div className={classes.actions}>
-                <button>Login</button>
+                <button id="registerButton">Register</button>
             </div>
         </form>
     </Card>)

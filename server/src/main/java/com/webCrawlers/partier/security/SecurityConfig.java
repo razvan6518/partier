@@ -21,6 +21,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import java.util.List;
 
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
 @EnableWebSecurity
@@ -59,9 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         });
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http.authorizeRequests().antMatchers(GET, "/").permitAll();
-//        http.authorizeRequests().antMatchers(GET, "/events/**").authenticated();
-        http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests().antMatchers(POST, "/events").hasRole("ORGANISER");
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
         http.formLogin();

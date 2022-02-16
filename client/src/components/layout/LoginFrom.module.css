@@ -43,3 +43,8 @@
     background-color: #a50e48;
     border-color: #a50e48;
 }
+
+.actions button:disabled {
+    background-color: #5b5b5b;
+    border-color: #a50e48;
+}
