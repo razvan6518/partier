@@ -21,11 +21,12 @@ function RegisterForm(props) {
 
     (function () {
         if (password !== "" && repeatPassword !== "") {
+            const regButton = document.querySelector("#registerButton");
             if (password !== repeatPassword) {
                 console.log("no match");
-                document.querySelector(".passwd input").style.border = "#77002e";
+                regButton.disabled = true;
             } else {
-                document.querySelector(".passwd input").style.border = "#111";
+                regButton.disabled = false;
                 console.log("match");
             }
         }
