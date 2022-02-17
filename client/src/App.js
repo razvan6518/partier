@@ -11,6 +11,7 @@ import Event from "./pages/Event";
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
 import AddEvent from "./pages/AddEvent";
+import UserProfilePage from "./pages/UserProfile";
 
 function App() {
     return (
@@ -20,7 +21,7 @@ function App() {
                 <Route path="/" element={<AllEvents/>} exact/>
                 <Route path="/event/:eventId" element={<Event/>} exact/>
                 <Route path="/theater" element={<Theater/>} exact/>
-                <Route path="/restaurants" element={<Restaurants/>} exact/>
+                <Route path="/profile" element={<UserProfilePage/>} exact/>
                 <Route path="/register" element={<RegisterPage/>} exact/>
                 <Route path="/login" element={<LoginPage/>} exact/>
                 <Route path="/add-event" element={<AddEvent/>} exact/>

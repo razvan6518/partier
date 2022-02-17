@@ -32,7 +32,7 @@ function NavigationBar() {
                         <Link to='/theater'>Theater</Link>
                     </li>
                     <li>
-                        <Link to='/restaurants'>Restaurants</Link>
+                        <Link to='/profile'>Profile</Link>
                     </li>
                     <li>
                         <Link to='/register'>Register</Link>

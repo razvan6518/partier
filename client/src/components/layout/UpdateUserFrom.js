@@ -38,7 +38,7 @@ function UpdateUserForm(props) {
         props.onRegisterUser(userItem);
     }
 
-    return (<Card>
+    return (
         <form className={classes.form} onSubmit={submitHandler}>
             <div className={classes.control}>
                 <label htmlFor="email">Email</label>
@@ -60,7 +60,7 @@ function UpdateUserForm(props) {
                 <button id="registerButton">Change</button>
             </div>
         </form>
-    </Card>)
+    )
 }
 
 export default UpdateUserForm;
