@@ -2,10 +2,7 @@ import NavigationBar from './components/layout/NavigationBar';
 import {Route, Routes} from "react-router-dom";
 
 import Theater from "./pages/Theater";
-import Restaurants from "./pages/Restaurants";
-import Bars from "./pages/Bars";
 import AllEvents from "./pages/AllEvents";
-import Services from "./pages/Services";
 import FooterPage from "./components/layout/Footer";
 import Event from "./pages/Event";
 import LoginPage from "./pages/Login";

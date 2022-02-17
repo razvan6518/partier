@@ -28,6 +28,16 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
+    @GetMapping("/users/{id}")
+    public ResponseEntity<AppUser> getUserById(@PathVariable long id){
+        return ResponseEntity.ok().body(userService.getUser(id));
+    }
+
+    @GetMapping("/users/name/{username}")
+    public ResponseEntity<AppUser> getUserByUsername(@PathVariable String username){
+        return ResponseEntity.ok().body(userService.getUser(username));
+    }
+
     @GetMapping("/user/organiser")
 //    @RolesAllowed("ORGANISER")
     public boolean getAuth(){

@@ -55,6 +55,11 @@ public class UserServiceImp implements UserService, UserDetailsService {
     }
 
     @Override
+    public AppUser getUser(long id) {
+        return userRepo.findById(id).get();
+    }
+
+    @Override
     public AppUser getUser(String username) {
         return userRepo.findByUsername(username);
     }

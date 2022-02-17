@@ -1,10 +1,16 @@
-import {useNavigate} from "react-router-dom";
 import LoginForm from "../components/layout/LoginForm";
+import {atom, useAtom} from "jotai";
+import {USER_ID} from "../components/STORE";
+
 
 function LoginPage() {
-    const navigate = useNavigate();
+
+    // const [userId, setUserId] = useAtom(USER_ID);
 
     function LoginHandler(user) {
+
+        // setUserId("1111111111");
+
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -24,7 +30,23 @@ function LoginPage() {
             .then(result => {
                 result = JSON.parse(result);
                 window.localStorage.setItem("token", result.access_token);
-                window.location.href = '/';
+
+                const myHeaders = new Headers();
+
+                const requestOptions = {
+                    method: 'GET',
+                    headers: myHeaders,
+                    redirect: 'follow'
+                };
+
+                fetch("http://localhost:5000/api/users/name/"+user.username, requestOptions)
+                    .then(response => response.text())
+                    .then(result => {
+                        console.log("user fetch: ",result);
+                        localStorage.setItem("user", result);
+                        window.location.href = '/';
+                    })
+                    .catch(error => console.log('error', error));
             })
             .catch(error => {
                     console.log('error', error)
