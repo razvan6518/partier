@@ -84,12 +84,12 @@ function RegisterForm(props) {
             <div className={classes.control}>
                 <label htmlFor="role">Choose a role:</label>
                 <select name="role" id="role" onChange={event => setRole(event.target.value)}>
-                    <option value="ROLE_USE">User</option>
+                    <option value="ROLE_USER">User</option>
                     <option value="ROLE_ORGANISER">Organiser</option>
                 </select>
             </div>
             <div className={classes.actions}>
-                <button>Login</button>
+                <button id="registerButton">Register</button>
             </div>
         </form>
     </Card>)

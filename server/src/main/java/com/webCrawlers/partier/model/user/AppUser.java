@@ -5,9 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
 public class AppUser {
@@ -19,9 +20,11 @@ public class AppUser {
     private String firstName;
     private String lastName;
     private String address;
-    private Date dateOfBirth;
+    private String birthdate;
     private String profilePhoto;
     private String password;
-    @ManyToMany
-    private Collection<Role> roles = new ArrayList<>();
+//    @ManyToMany
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
+//    private Collection<Role> roles = new ArrayList<>();
 }

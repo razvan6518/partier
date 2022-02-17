@@ -6,9 +6,11 @@ import com.webCrawlers.partier.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.annotation.security.RolesAllowed;
 import java.net.URI;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:3000")
+//@EnableGlobalMethodSecurity(jsr250Enabled=true)
 public class UserController {
 
     private final UserService userService;
@@ -23,6 +26,12 @@ public class UserController {
     @GetMapping("/users")
     public ResponseEntity<List<AppUser>> getUsers(){
         return ResponseEntity.ok().body(userService.getUsers());
+    }
+
+    @GetMapping("/user/organiser")
+//    @RolesAllowed("ORGANISER")
+    public boolean getAuth(){
+        return true;
     }
 
     @PostMapping("/user/save")
@@ -37,11 +46,6 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
 
-    @PostMapping("/role/addtouser")
-    public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm roleToUserForm){
-        userService.addRoleToUser(roleToUserForm.getUsername(), roleToUserForm.getRoleName());
-        return ResponseEntity.ok().build();
-    }
 }
 
 @Data
