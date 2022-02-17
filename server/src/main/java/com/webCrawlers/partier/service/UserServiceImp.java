@@ -45,13 +45,14 @@ public class UserServiceImp implements UserService, UserDetailsService {
         return roleRepo.save(role);
     }
 
-//    @Override
-//    public void addRoleToUser(String username, String roleName) {
-//        AppUser appUser = userRepo.findByUsername(username);
-//        Role role = roleRepo.findByName(roleName);
-//        appUser.getRoles().add(role);
-
-//    }
+    @Override
+    public AppUser updateUser(AppUser user, long id) {
+        AppUser appUser = userRepo.findById(id).get();
+        appUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        appUser.setAddress(user.getAddress());
+        appUser.setEmail(user.getEmail());
+        return userRepo.save(appUser);
+    }
 
     @Override
     public AppUser getUser(String username) {
