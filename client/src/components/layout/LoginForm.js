@@ -24,24 +24,24 @@ function LoginForm(props) {
             .then(response => response.text())
             .then(result => {
                 result = JSON.parse(result);
-                window.localStorage.setItem("token", result.access_token);
-
-                const myHeaders = new Headers();
-
-                const requestOptions = {
-                    method: 'GET',
-                    headers: myHeaders,
-                    redirect: 'follow'
-                };
-
-                fetch("http://localhost:5000/api/users/name/"+user.username, requestOptions)
-                    .then(response => response.text())
-                    .then(result => {
-                        console.log("user fetch: ",result);
-                        localStorage.setItem("user", result);
-                        window.location.href = '/';
-                    })
-                    .catch(error => console.log('error', error));
+                // TODO: add limit of tries
+                if (result.access_token !== undefined) {
+                    window.localStorage.setItem("token", result.access_token);
+                    const myHeaders = new Headers();
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: myHeaders,
+                        redirect: 'follow'
+                    }
+                    fetch("http://localhost:5000/api/users/name/" + user.username, requestOptions)
+                        .then(response => response.text())
+                        .then(result => {
+                            console.log("user fetch: ", result);
+                            localStorage.setItem("user", result);
+                            window.location.href = '/';
+                        })
+                        .catch(error => console.log('error', error));
+                }
             })
             .catch(error => {
                     console.log('error', error)
@@ -61,34 +61,34 @@ function LoginForm(props) {
         LoginHandler(userItem);
     }
 
-    if (!props.show){
+    if (!props.show) {
         return null;
     }
 
     return (<>
-        <div className="login-box">
-            <h2>Login</h2>
-            <form>
-                <div className="user-box">
-                    <input type="text" name="" required=""  ref={usernameInputRef}/>
+            <div className="login-box">
+                <h2>Login</h2>
+                <form>
+                    <div className="user-box">
+                        <input type="text" name="" required="" ref={usernameInputRef}/>
                         <label>Username</label>
-                </div>
-                <div className="user-box">
-                    <input type="password" name="" required="" ref={passwordInputRef}/>
+                    </div>
+                    <div className="user-box">
+                        <input type="password" name="" required="" ref={passwordInputRef}/>
                         <label>Password</label>
-                </div>
-                <a href="#" onClick={submitHandler}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Submit
-                </a>
-                <a href="#" onClick={props.onClose}>
-                    X
-                </a>
-            </form>
-        </div>
+                    </div>
+                    <a href="#" onClick={submitHandler}>
+                        <span/>
+                        <span/>
+                        <span/>
+                        <span/>
+                        Submit
+                    </a>
+                    <a href="#" onClick={props.onClose}>
+                        X
+                    </a>
+                </form>
+            </div>
         </>
     )
 }

@@ -1,7 +1,5 @@
 import {Link} from 'react-router-dom';
 import classes from './NavigationBar.module.css'
-import {useAtom} from "jotai";
-import {USER_ID} from "../STORE";
 import {useState} from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterFrom";
@@ -27,29 +25,38 @@ function NavigationBar() {
                     <li>
                         <Link to='/'><h1>Partier</h1></Link>
                     </li>
-                    {username!=null&&
+                    {username != null &&
                         <li>
                             <h4>Welcome {username}</h4>
                         </li>
                     }
-                    <li>
-                        <Link to='/theater'>Theater</Link>
-                    </li>
-                    <li>
-                        <Link to='/profile'>Profile</Link>
-                    </li>
                     {username == null &&
                         <li>
-                            <button onClick={() => setShowRegister(true)}>Register</button>
+                            <Link to='/profile'>Profile</Link>
+                        </li>
+                    }
+                    {username == null &&
+                        <li>
+                            <button onClick={() => {
+                                setShowRegister(true);
+                                setShowLogin(false);
+                            }}>
+                                Register
+                            </button>
                             <RegisterForm onClose={() => setShowRegister(false)} show={showRegister}/>
                         </li>}
                     {username == null &&
                         <li>
-                            <button onClick={() => setShowLogin(true)}>Login</button>
+                            <button onClick={() => {
+                                setShowLogin(true);
+                                setShowRegister(false);
+                            }}>
+                                Login
+                            </button>
                             <LoginForm onClose={() => setShowLogin(false)} show={showLogin}/>
                         </li>
                     }
-                    {role == 'ROLE_ORGANISER'&&
+                    {role == 'ROLE_ORGANISER' &&
                         <li>
                             <Link to='/add-event'>Add Event</Link>
                         </li>
