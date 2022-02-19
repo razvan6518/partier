@@ -5,7 +5,6 @@ import Theater from "./pages/Theater";
 import AllEvents from "./pages/AllEvents";
 import FooterPage from "./components/layout/Footer";
 import Event from "./pages/Event";
-import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
 import AddEvent from "./pages/AddEvent";
 import UserProfilePage from "./pages/UserProfile";
@@ -20,7 +19,6 @@ function App() {
                 <Route path="/theater" element={<Theater/>} exact/>
                 <Route path="/profile" element={<UserProfilePage/>} exact/>
                 <Route path="/register" element={<RegisterPage/>} exact/>
-                <Route path="/login" element={<LoginPage/>} exact/>
                 <Route path="/add-event" element={<AddEvent/>} exact/>
             </Routes>
             <FooterPage/>

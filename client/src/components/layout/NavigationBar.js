@@ -2,12 +2,12 @@ import {Link} from 'react-router-dom';
 import classes from './NavigationBar.module.css'
 import {useAtom} from "jotai";
 import {USER_ID} from "../STORE";
+import {useState} from "react";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterFrom";
 
 function NavigationBar() {
 
-    // let userOrganiser = false;
-    // const [userId, setUserId] = useAtom(USER_ID);
-    // console.log("userID: " ,userId);
     let username = null;
     let role = null;
     try {
@@ -17,25 +17,8 @@ function NavigationBar() {
     } catch {
     }
 
-    // console.log("----->", username)
-    // console.log("----->",localStorage.getItem("user"));
-
-    // const myHeaders = new Headers();
-    // myHeaders.append("Authorization", "Bearer "+localStorage.getItem("token"));
-    //
-    // const requestOptions = {
-    //     method: 'GET',
-    //     headers: myHeaders,
-    //     redirect: 'follow'
-    // };
-    //
-    // fetch("http://localhost:5000/api/user/organiser", requestOptions)
-    //     .then(response => response.text())
-    //     .then(result => {
-    //         console.log("res: ", result)
-    //         // userOrganiser = result
-    //     })
-    //     .catch(error => console.log("error: ", error));
+    const [showLogin, setShowLogin] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
 
     return (
         <header className={classes.header}>
@@ -57,11 +40,13 @@ function NavigationBar() {
                     </li>
                     {username == null &&
                         <li>
-                            <Link to='/register'>Register</Link>
+                            <button onClick={() => setShowRegister(true)}>Register</button>
+                            <RegisterForm onClose={() => setShowRegister(false)} show={showRegister}/>
                         </li>}
                     {username == null &&
                         <li>
-                            <Link to='/login'>Login</Link>
+                            <button onClick={() => setShowLogin(true)}>Login</button>
+                            <LoginForm onClose={() => setShowLogin(false)} show={showLogin}/>
                         </li>
                     }
                     {role == 'ROLE_ORGANISER'&&
@@ -72,6 +57,7 @@ function NavigationBar() {
                 </ul>
             </nav>
         </header>
+
     )
 }
 
