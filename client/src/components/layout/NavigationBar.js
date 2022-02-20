@@ -1,8 +1,8 @@
 import {Link} from 'react-router-dom';
 import classes from './NavigationBar.module.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterFrom";
+import RegisterForm from "./RegisterForm";
 
 function NavigationBar() {
 
@@ -30,7 +30,7 @@ function NavigationBar() {
                             <h4>Welcome {username}</h4>
                         </li>
                     }
-                    {username == null &&
+                    {username != null &&
                         <li>
                             <Link to='/profile'>Profile</Link>
                         </li>

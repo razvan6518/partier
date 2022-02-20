@@ -1,36 +1,51 @@
-import {useRef} from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import classes from "./UpdateUser.module.css";
 import {useState} from "react";
 
-import Card from "../ui/Card";
-import classes from "./LoginFrom.module.css";
-
+import DatePicker from "react-datepicker";
 
 function UpdateUserForm(props) {
 
+    console.log("clases: ", classes)
+
+    const [email, setEmail] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [address, setAddress] = useState("");
+    const [birthdate, setBirthdate] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const [address, setAddress] = useState("");
 
+    let user;
+
+    if (localStorage.getItem("user") != null) {
+        user = JSON.parse(localStorage.getItem("user"));
+    } else {
+        return;
+    }
+
+    // TODO: add check for email(format, not in DB) length etc...
     (function () {
         if (password !== "" && repeatPassword !== "") {
-            const regButton = document.querySelector("#registerButton");
+            const updateButton = document.querySelector("#updateButton");
+            console.log(updateButton);
             if (password !== repeatPassword) {
                 console.log("no match");
-                regButton.disabled = true;
+                // updateButton.classList.add("disabled");
             } else {
-                regButton.disabled = false;
+                // updateButton.classList.remove("disabled");
                 console.log("match");
             }
         }
-    }) ();
+    })();
 
     function submitHandler(user) {
         user.preventDefault();
         const userItem = {
             "email": email,
+            "birthdate": birthdate,
+            "firstName": firstName,
+            "lastName": lastName,
             "address": address,
             "password": password,
             "repeatedPassword": repeatPassword
@@ -39,27 +54,47 @@ function UpdateUserForm(props) {
     }
 
     return (
-        <form className={classes.form} onSubmit={submitHandler}>
-            <div className={classes.control}>
-                <label htmlFor="email">Email</label>
-                <input type="email" required id="email" onChange={event => setEmail(event.target.value)}/>
-            </div>
-            <div className={classes.control}>
-                <label htmlFor="address">Address</label>
-                <input type="address" required id="address" onChange={event => setAddress(event.target.value)}/>
-            </div>
-            <div className={classes.control} >
-                <label htmlFor="password">Password</label>
-                <input type="password" required id="password" onChange={event => setPassword(event.target.value)}/>
-            </div>
-            <div className={classes.control + " " + "passwd"}>
-                <label htmlFor="repeatPassword">Repeat Password</label>
-                <input type="password" required id="repeatPassword" onChange={event => setRepeatPassword(event.target.value)}/>
-            </div>
-            <div className={classes.actions}>
-                <button id="registerButton">Change</button>
-            </div>
-        </form>
+        <div className={`${classes.container}`}>
+            <form>
+                <div className={`${classes.group}`}>
+                    <input type="text" className={`${classes.input}`} onChange={event => setEmail(event.target.value)}/>
+                    <span className={`${classes.highlight}`}/>
+                    <span className={`${classes.bar}`}/>
+                    <label className={`${classes.label}`}>Email: {user.email}</label>
+                </div>
+                <div className={`${classes.group}`}>
+                    <input type="text" className={`${classes.input}`} onChange={event => setFirstName(event.target.value)}/>
+                    <span className={`${classes.highlight}`}/>
+                    <span className={`${classes.bar}`}/>
+                    <label className={`${classes.label}`}>First Name: {user.firstName}</label>
+                </div>
+                <div className={`${classes.group}`}>
+                    <input type="text" className={`${classes.input}`} onChange={event => setLastName(event.target.value)}/>
+                    <span className={`${classes.highlight}`}/>
+                    <span className={`${classes.bar}`}/>
+                    <label className={`${classes.label}`}>Last Name: {user.lastName}</label>
+                </div>
+                <div className={`${classes.group}`}>
+                    <input type="text" className={`${classes.input}`} onChange={event => setAddress(event.target.value)}/>
+                    <span className={`${classes.highlight}`}/>
+                    <span className={`${classes.bar}`}/>
+                    <label className={`${classes.label}`}>Address: {user.address}</label>
+                </div>
+                <div className={`${classes.group}`}>
+                    <input type="password" className={`${classes.input}`} onChange={event => setPassword(event.target.value)}/>
+                    <span className={`${classes.highlight}`}/>
+                    <span className={`${classes.bar}`}/>
+                    <label className={`${classes.label}`}>Password</label>
+                </div>
+                <div className={`${classes.group}`}>
+                    <input type="password" className={`${classes.input}`} onChange={event => setRepeatPassword(event.target.value)}/>
+                    <span className={`${classes.highlight}`}/>
+                    <span className={`${classes.bar}`}/>
+                    <label className={`${classes.label}`}>Repeat Password</label>
+                </div>
+            </form>
+            <button id="updateButton" className={`${classes.button36}`} role="button">Update</button>
+        </div>
     )
 }
 
