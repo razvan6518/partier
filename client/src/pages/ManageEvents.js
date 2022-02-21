@@ -1,7 +1,7 @@
 import EventList from "../components/events/EventList";
 import {useEffect, useState} from "react";
 
-function AllEventsPage() {
+function ManageEvents() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadedEvents, setLoadedEvents] = useState([]);
@@ -21,13 +21,8 @@ function AllEventsPage() {
             redirect: 'follow'
         };
 
-        // fetch("http://localhost:5000/events", requestOptions)
-        //     .then(response => response.text())
-        //     .then(result => console.log(result))
-        //     .catch(error => console.log('error', error));
-
         fetch(
-            "http://localhost:5000/events/approved", requestOptions
+            "http://localhost:5000/events/unapproved", requestOptions
         ).then(response => {
             return response.json();
         }).then(data => {
@@ -61,5 +56,5 @@ function AllEventsPage() {
     );
 }
 
-export default AllEventsPage;
+export default ManageEvents;
 

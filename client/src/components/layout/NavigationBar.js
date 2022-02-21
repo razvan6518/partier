@@ -61,6 +61,11 @@ function NavigationBar() {
                             <Link to='/add-event'>Add Event</Link>
                         </li>
                     }
+                    {role == 'ROLE_ADMIN' &&
+                        <li>
+                            <Link to='/manage-events'>Manage Events</Link>
+                        </li>
+                    }
                 </ul>
             </nav>
         </header>

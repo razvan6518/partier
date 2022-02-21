@@ -48,7 +48,10 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     public AppUser updateUser(AppUser user, long id) {
         AppUser appUser = userRepo.findById(id).get();
+        // TODO: fix bug when update user details without changing password
         appUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        appUser.setFirstName(user.getFirstName());
+        appUser.setLastName(user.getLastName());
         appUser.setAddress(user.getAddress());
         appUser.setEmail(user.getEmail());
         return userRepo.save(appUser);

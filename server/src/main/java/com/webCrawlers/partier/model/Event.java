@@ -28,6 +28,7 @@ public class Event {
     private String endDate;
     private String image;
     private String category;
+    private boolean approved;
 
 //    private Set<String> artists;
 

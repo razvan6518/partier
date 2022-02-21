@@ -1,7 +1,5 @@
 package com.webCrawlers.partier.service;
 
-
-
 import com.webCrawlers.partier.model.user.AppUser;
 import com.webCrawlers.partier.model.user.Role;
 

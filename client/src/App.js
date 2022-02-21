@@ -8,6 +8,7 @@ import Event from "./pages/Event";
 import RegisterPage from "./pages/Register";
 import AddEvent from "./pages/AddEvent";
 import UserProfilePage from "./pages/UserProfile";
+import ManageEvents from "./pages/ManageEvents";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/profile" element={<UserProfilePage/>} exact/>
                 <Route path="/register" element={<RegisterPage/>} exact/>
                 <Route path="/add-event" element={<AddEvent/>} exact/>
+                <Route path="/manage-events" element={<ManageEvents/>} exact/>
             </Routes>
             <FooterPage/>
         </div>

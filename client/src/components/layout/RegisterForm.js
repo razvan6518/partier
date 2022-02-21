@@ -38,7 +38,7 @@ function RegisterForm(props) {
         }
     })();
 
-    async function RegisterHandler(user) {
+    async function registerHandler(user) {
 
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -80,7 +80,7 @@ function RegisterForm(props) {
             "password": password,
             "repeatedPassword": repeatPassword
         };
-        RegisterHandler(userItem);
+        registerHandler(userItem);
     }
 
     if (!props.show)

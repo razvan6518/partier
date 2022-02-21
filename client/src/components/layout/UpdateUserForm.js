@@ -39,20 +39,20 @@ function UpdateUserForm(props) {
         }
     })();
 
-    function submitHandler(user) {
+    function updateHandler(user) {
         user.preventDefault();
         const userItem = {
             "email": email,
-            "birthdate": birthdate,
             "firstName": firstName,
             "lastName": lastName,
             "address": address,
             "password": password,
             "repeatedPassword": repeatPassword
         };
-        props.onRegisterUser(userItem);
+        props.onUpdateUser(userItem);
     }
 
+    // TODO: make separat form for password change
     return (
         <div className={`${classes.container}`}>
             <form>
@@ -93,7 +93,7 @@ function UpdateUserForm(props) {
                     <label className={`${classes.label}`}>Repeat Password</label>
                 </div>
             </form>
-            <button id="updateButton" className={`${classes.button36}`} role="button">Update</button>
+            <button id="updateButton" className={`${classes.button36}`} onClick={updateHandler} role="button">Update</button>
         </div>
     )
 }
