@@ -31,6 +31,7 @@ function AddEventForm(props) {
         props.onAddEvent(eventItem);
     }
 
+    // TODO: redirect after add event, add filters, add css
     return (<Card>
         <form className={classes.form} onSubmit={submitHandler}>
             <div className={classes.control}>

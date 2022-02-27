@@ -48,6 +48,7 @@ function NavigationBar() {
                             <button onClick={() => {
                                 localStorage.clear();
                                 setUser(null);
+                                window.location.href = '/';
                             }}>
                                 Log Out
                             </button>

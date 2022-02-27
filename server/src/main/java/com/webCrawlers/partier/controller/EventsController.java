@@ -39,4 +39,14 @@ public class EventsController {
         eventService.addEvent(event);
     }
 
+    @PutMapping("/approve/{id}")
+    public void approveEvent(@PathVariable Long id) {
+        eventService.approveEvent(id);
+    }
+
+    @PostMapping("/delete/{id}")
+    public void deleteEvent(@PathVariable Long id) {
+        eventService.deleteEvent(id);
+    }
+
 }

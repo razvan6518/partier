@@ -20,11 +20,13 @@ function LoginForm(props) {
             redirect: 'follow'
         };
 
+
         fetch("http://localhost:5000/login", requestOptions)
             .then(response => response.text())
             .then(result => {
                 result = JSON.parse(result);
                 // TODO: add limit of tries
+                // TODO: add message when invalid password or name
                 if (result.access_token !== undefined) {
                     window.localStorage.setItem("token", result.access_token);
                     const myHeaders = new Headers();

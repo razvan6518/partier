@@ -1,10 +1,15 @@
 import EventList from "../components/events/EventList";
 import {useEffect, useState} from "react";
+import EventItem from "../components/events/EventItem";
 
 function ManageEvents() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadedEvents, setLoadedEvents] = useState([]);
+
+    function removeEventFromLoadedEvents(id){
+        setLoadedEvents(loadedEvents.filter(value => value.id !== id));
+    }
 
     useEffect(() => {
         setIsLoading(true);
@@ -51,7 +56,11 @@ function ManageEvents() {
 
     return (
         <section>
-            <EventList events={loadedEvents}/>
+            {loadedEvents.map(event => <EventItem event={event}
+                                                  approve={true}
+                                                  unapprove={true}
+                                                  removeEventFromLoadedEvents={removeEventFromLoadedEvents}
+            />)}
         </section>
     );
 }

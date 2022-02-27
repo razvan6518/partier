@@ -39,7 +39,6 @@ public class UserController {
     }
 
     @GetMapping("/user/organiser")
-//    @RolesAllowed("ORGANISER")
     public boolean getAuth(){
         return true;
     }
