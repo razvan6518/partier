@@ -6,8 +6,6 @@ import DatePicker from "react-datepicker";
 
 function UpdateUserForm(props) {
 
-    console.log("clases: ", classes)
-
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -52,7 +50,7 @@ function UpdateUserForm(props) {
         props.onUpdateUser(userItem);
     }
 
-    // TODO: make separat form for password change
+    // TODO: make separate form for password change
     return (
         <div className={`${classes.container}`}>
             <form>

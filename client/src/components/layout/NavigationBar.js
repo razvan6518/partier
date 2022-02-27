@@ -8,8 +8,16 @@ function NavigationBar() {
 
     let username = null;
     let role = null;
+    let loggedUser = null;
+
     try {
-        let user = JSON.parse(localStorage.getItem("user"));
+        loggedUser = JSON.parse(localStorage.getItem("user"));
+    } catch {
+    }
+
+    const [user, setUser] = useState(loggedUser);
+
+    try {
         username = user.username;
         role = user.roles[0];
     } catch {
@@ -33,6 +41,16 @@ function NavigationBar() {
                     {username != null &&
                         <li>
                             <Link to='/profile'>Profile</Link>
+                        </li>
+                    }
+                    {username != null &&
+                        <li>
+                            <button onClick={() => {
+                                localStorage.clear();
+                                setUser(null);
+                            }}>
+                                Log Out
+                            </button>
                         </li>
                     }
                     {username == null &&

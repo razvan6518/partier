@@ -4,12 +4,13 @@ import classes from "./EventList.module.css"
 function EventList(props) {
     return (
         <ul className={classes.list}>
-            {props.events.map(meetup => <EventItem key={meetup.id}
-                                                   id={meetup.id}
-                                                   image={meetup.image}
-                                                   title={meetup.title}
-                                                   address={meetup.address}
-                                                   description={meetup.description}
+            {props.events.map(event => <EventItem key={event.id}
+                                                   id={event.id}
+                                                   image={event.image}
+                                                   title={event.title}
+                                                   address={event.address}
+                                                   description={event.description}
+                                                  approved={event.approved}
             />)}
         </ul>
     );

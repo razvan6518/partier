@@ -36,7 +36,6 @@ function LoginForm(props) {
                     fetch("http://localhost:5000/api/users/name/" + user.username, requestOptions)
                         .then(response => response.text())
                         .then(result => {
-                            console.log("user fetch: ", result);
                             localStorage.setItem("user", result);
                             window.location.href = '/';
                         })
