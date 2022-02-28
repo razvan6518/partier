@@ -33,7 +33,7 @@ function MeetupItem(props) {
                     <BuyTicketButton/>
                 }
                 {props.toFavorites != null &&
-                    <ToFavoriteButton/>
+                    <ToFavoriteButton eventId={props.event.id}/>
                 }
             </div>
         </div>
