@@ -1,0 +1,17 @@
+.imgContainer {
+    margin-top: 1rem;
+    top: 1rem;
+    text-align: center;
+    position: relative;
+}
+
+.imgContainer img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.name{
+    margin-top: 5rem;
+    text-align: center;
+}
