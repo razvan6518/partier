@@ -61,10 +61,15 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
 
+    @PostMapping("/event/favorites")
+    public ResponseEntity<?> addRoleToUser(@RequestBody EventToUserForm eventToUserForm) {
+        userService.addEventToFavorites(eventToUserForm.getUsername(), eventToUserForm.getEventId());
+        return ResponseEntity.ok().build();
+    }
 }
 
 @Data
-class RoleToUserForm {
+class EventToUserForm {
     private String username;
-    private String roleName;
+    private Long eventId;
 }

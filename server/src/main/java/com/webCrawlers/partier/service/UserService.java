@@ -1,5 +1,6 @@
 package com.webCrawlers.partier.service;
 
+import com.webCrawlers.partier.model.Event;
 import com.webCrawlers.partier.model.user.AppUser;
 import com.webCrawlers.partier.model.user.Role;
 
@@ -12,4 +13,5 @@ public interface UserService {
     AppUser getUser(long id);
     AppUser getUser(String username);
     List<AppUser> getUsers();
+    void addEventToFavorites(String username, Long eventId);
 }

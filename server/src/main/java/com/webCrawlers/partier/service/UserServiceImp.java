@@ -1,7 +1,9 @@
 package com.webCrawlers.partier.service;
 
+import com.webCrawlers.partier.model.Event;
 import com.webCrawlers.partier.model.user.AppUser;
 import com.webCrawlers.partier.model.user.Role;
+import com.webCrawlers.partier.repository.EventRepository;
 import com.webCrawlers.partier.repository.RoleRepo;
 import com.webCrawlers.partier.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
+    private final EventRepository eventRepo;
     private final PasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -70,6 +73,13 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     public List<AppUser> getUsers() {
         return userRepo.findAll();
+    }
+
+    @Override
+    public void addEventToFavorites(String username, Long eventId) {
+        AppUser appUser = userRepo.findByUsername(username);
+        Event event = eventRepo.getById(eventId);
+        appUser.getFavoriteEvents().add(event);
     }
 
 }
