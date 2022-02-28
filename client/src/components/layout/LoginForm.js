@@ -1,10 +1,55 @@
 import {useRef} from "react";
-import Card from "../ui/Card";
-import classes from "./LoginFrom.module.css";
+import "./Login.css";
 
 function LoginForm(props) {
     const usernameInputRef = useRef();
     const passwordInputRef = useRef();
+
+    function LoginHandler(user) {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        const urlencoded = new URLSearchParams();
+        urlencoded.append("username", user.username);
+        urlencoded.append("password", user.password);
+
+        const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: urlencoded,
+            redirect: 'follow'
+        };
+
+
+        fetch("http://localhost:5000/login", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                result = JSON.parse(result);
+                // TODO: add limit of tries
+                // TODO: add message when invalid password or name
+                if (result.access_token !== undefined) {
+                    window.localStorage.setItem("token", result.access_token);
+                    const myHeaders = new Headers();
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: myHeaders,
+                        redirect: 'follow'
+                    }
+                    fetch("http://localhost:5000/api/users/name/" + user.username, requestOptions)
+                        .then(response => response.text())
+                        .then(result => {
+                            localStorage.setItem("user", result);
+                            window.location.href = '/';
+                        })
+                        .catch(error => console.log('error', error));
+                }
+            })
+            .catch(error => {
+                    console.log('error', error)
+                    console.log("Wrong username or password !")
+                }
+            );
+    }
 
     function submitHandler(user) {
         user.preventDefault();
@@ -14,24 +59,39 @@ function LoginForm(props) {
 
         const userItem = {"username": enteredUsername, "password": enteredPassword}
 
-        props.onAuthUser(userItem)
+        LoginHandler(userItem);
     }
 
-    return (<Card>
-        <form className={classes.form} onSubmit={submitHandler}>
-            <div className={classes.control}>
-                <label htmlFor="username">Username</label>
-                <input type="username" required id="email" ref={usernameInputRef}/>
+    if (!props.show) {
+        return null;
+    }
+
+    return (<>
+            <div className="login-box">
+                <h2>Login</h2>
+                <form>
+                    <div className="user-box">
+                        <input type="text" name="" required="" ref={usernameInputRef}/>
+                        <label>Username</label>
+                    </div>
+                    <div className="user-box">
+                        <input type="password" name="" required="" ref={passwordInputRef}/>
+                        <label>Password</label>
+                    </div>
+                    <a href="#" onClick={submitHandler}>
+                        <span/>
+                        <span/>
+                        <span/>
+                        <span/>
+                        Submit
+                    </a>
+                    <a href="#" onClick={props.onClose}>
+                        X
+                    </a>
+                </form>
             </div>
-            <div className={classes.control}>
-                <label htmlFor="password">Password</label>
-                <input type="password" required id="password" ref={passwordInputRef}/>
-            </div>
-            <div className={classes.actions}>
-                <button>Login</button>
-            </div>
-        </form>
-    </Card>)
+        </>
+    )
 }
 
 export default LoginForm;

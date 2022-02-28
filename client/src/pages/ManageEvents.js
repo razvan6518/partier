@@ -1,10 +1,15 @@
 import EventList from "../components/events/EventList";
 import {useEffect, useState} from "react";
+import EventItem from "../components/events/EventItem";
 
-function AllEventsPage() {
+function ManageEvents() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadedEvents, setLoadedEvents] = useState([]);
+
+    function removeEventFromLoadedEvents(id){
+        setLoadedEvents(loadedEvents.filter(value => value.id !== id));
+    }
 
     useEffect(() => {
         setIsLoading(true);
@@ -21,13 +26,8 @@ function AllEventsPage() {
             redirect: 'follow'
         };
 
-        // fetch("http://localhost:5000/events", requestOptions)
-        //     .then(response => response.text())
-        //     .then(result => console.log(result))
-        //     .catch(error => console.log('error', error));
-
         fetch(
-            "http://localhost:5000/events/approved", requestOptions
+            "http://localhost:5000/events/unapproved", requestOptions
         ).then(response => {
             return response.json();
         }).then(data => {
@@ -56,10 +56,14 @@ function AllEventsPage() {
 
     return (
         <section>
-            <EventList events={loadedEvents}/>
+            {loadedEvents.map(event => <EventItem event={event}
+                                                  approve={true}
+                                                  unapprove={true}
+                                                  removeEventFromLoadedEvents={removeEventFromLoadedEvents}
+            />)}
         </section>
     );
 }
 
-export default AllEventsPage;
+export default ManageEvents;
 

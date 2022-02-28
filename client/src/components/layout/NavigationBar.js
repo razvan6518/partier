@@ -1,51 +1,94 @@
 import {Link} from 'react-router-dom';
 import classes from './NavigationBar.module.css'
+import {useEffect, useState} from "react";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 function NavigationBar() {
 
-    let userOrganiser = false;
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer "+localStorage.getItem("token"));
+    let username = null;
+    let role = null;
+    let loggedUser = null;
 
-    const requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-    };
+    try {
+        loggedUser = JSON.parse(localStorage.getItem("user"));
+    } catch {
+    }
 
-    fetch("http://localhost:5000/api/user/organiser", requestOptions)
-        .then(response => response.text())
-        .then(result => {
-            console.log("res: ", result)
-            userOrganiser = result
-        })
-        .catch(error => console.log("error: ", error));
+    const [user, setUser] = useState(loggedUser);
+
+    try {
+        username = user.username;
+        role = user.roles[0];
+    } catch {
+    }
+
+    const [showLogin, setShowLogin] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
 
     return (
         <header className={classes.header}>
-            <nav  id="nav">
+            <nav id="nav">
                 <ul>
                     <li>
                         <Link to='/'><h1>Partier</h1></Link>
                     </li>
-                    <li>
-                        <Link to='/theater'>Theater</Link>
-                    </li>
-                    <li>
-                        <Link to='/profile'>Profile</Link>
-                    </li>
-                    <li>
-                        <Link to='/register'>Register</Link>
-                    </li>
-                    <li>
-                        <Link to='/login'>Login</Link>
-                    </li>
-                    <li>
-                        <Link to='/add-event'>Add Event</Link>
-                    </li>
+                    {username != null &&
+                        <li>
+                            <h4>Welcome {username}</h4>
+                        </li>
+                    }
+                    {username != null &&
+                        <li>
+                            <Link to='/profile'>Profile</Link>
+                        </li>
+                    }
+                    {username != null &&
+                        <li>
+                            <button onClick={() => {
+                                localStorage.clear();
+                                setUser(null);
+                                window.location.href = '/';
+                            }}>
+                                Log Out
+                            </button>
+                        </li>
+                    }
+                    {username == null &&
+                        <li>
+                            <button onClick={() => {
+                                setShowRegister(true);
+                                setShowLogin(false);
+                            }}>
+                                Register
+                            </button>
+                            <RegisterForm onClose={() => setShowRegister(false)} show={showRegister}/>
+                        </li>}
+                    {username == null &&
+                        <li>
+                            <button onClick={() => {
+                                setShowLogin(true);
+                                setShowRegister(false);
+                            }}>
+                                Login
+                            </button>
+                            <LoginForm onClose={() => setShowLogin(false)} show={showLogin}/>
+                        </li>
+                    }
+                    {role == 'ROLE_ORGANISER' &&
+                        <li>
+                            <Link to='/add-event'>Add Event</Link>
+                        </li>
+                    }
+                    {role == 'ROLE_ADMIN' &&
+                        <li>
+                            <Link to='/manage-events'>Manage Events</Link>
+                        </li>
+                    }
                 </ul>
             </nav>
         </header>
+
     )
 }
 

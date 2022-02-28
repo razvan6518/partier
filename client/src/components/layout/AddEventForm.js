@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import {useState} from "react";
 
 import Card from "../ui/Card";
-import classes from "./LoginFrom.module.css";
+import classes from "./LoginForm.module.css";
 
 
 function AddEventForm(props) {
@@ -31,6 +31,7 @@ function AddEventForm(props) {
         props.onAddEvent(eventItem);
     }
 
+    // TODO: redirect after add event, add filters, add css
     return (<Card>
         <form className={classes.form} onSubmit={submitHandler}>
             <div className={classes.control}>

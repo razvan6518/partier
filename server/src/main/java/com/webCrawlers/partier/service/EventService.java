@@ -1,31 +1,20 @@
 package com.webCrawlers.partier.service;
 
 import com.webCrawlers.partier.model.Event;
-import com.webCrawlers.partier.repository.EventRepository;
-import com.webCrawlers.partier.service.DAO.EventDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-@Service
-public class EventService {
+public interface EventService {
 
+    Set<Event> getAllApprovedEvents();
 
-    @Autowired
-    EventRepository eventRepository;
+    Set<Event> getAllUnapprovedEvents();
 
+    Event getEvent(Long id);
 
-    public Set<Event> getAllEvents() {
-        return Set.copyOf(eventRepository.findAll());
-    }
+    void addEvent(Event event);
 
-    public Event getEvent(Long id) {
-        return eventRepository.findById(id).orElse(null);
-    }
+    Boolean approveEvent(Long id);
 
-    public void addEvent(Event event) {
-        eventRepository.save(event);
-    }
-
+    void deleteEvent(Long id);
 }

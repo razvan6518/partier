@@ -33,11 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
 
-//    @Autowired
-//    public SecurityConfig(PasswordEncoder passwordEncoder){
-//        this.passwordEncoder = passwordEncoder;
-//    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
@@ -65,16 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
         http.formLogin();
 
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/","index")
-//                .permitAll()
-//                .antMatchers("/item/details/*")
-//                .hasRole("DAD")
-//                .antMatchers("/home/privacy")
-//                .hasRole("MOM")
-//                .and()
-//                .httpBasic();
     }
 
     @Bean

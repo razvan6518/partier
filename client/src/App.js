@@ -2,16 +2,13 @@ import NavigationBar from './components/layout/NavigationBar';
 import {Route, Routes} from "react-router-dom";
 
 import Theater from "./pages/Theater";
-import Restaurants from "./pages/Restaurants";
-import Bars from "./pages/Bars";
 import AllEvents from "./pages/AllEvents";
-import Services from "./pages/Services";
 import FooterPage from "./components/layout/Footer";
 import Event from "./pages/Event";
-import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
 import AddEvent from "./pages/AddEvent";
 import UserProfilePage from "./pages/UserProfile";
+import ManageEvents from "./pages/ManageEvents";
 
 function App() {
     return (
@@ -23,8 +20,8 @@ function App() {
                 <Route path="/theater" element={<Theater/>} exact/>
                 <Route path="/profile" element={<UserProfilePage/>} exact/>
                 <Route path="/register" element={<RegisterPage/>} exact/>
-                <Route path="/login" element={<LoginPage/>} exact/>
                 <Route path="/add-event" element={<AddEvent/>} exact/>
+                <Route path="/manage-events" element={<ManageEvents/>} exact/>
             </Routes>
             <FooterPage/>
         </div>
