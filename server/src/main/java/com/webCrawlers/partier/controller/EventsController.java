@@ -36,6 +36,7 @@ public class EventsController {
 
     @PostMapping
     public void addEvent(@RequestBody Event event) {
+
         eventService.addEvent(event);
     }
 
@@ -47,6 +48,12 @@ public class EventsController {
     @PostMapping("/delete/{id}")
     public void deleteEvent(@PathVariable Long id) {
         eventService.deleteEvent(id);
+    }
+
+
+    @GetMapping("/favorites/{userId}")
+    public Set<Event> getAllFavoriteEventsForUser(@PathVariable Long userId) {
+        return eventService.getAllFavoriteEventsForUser(userId);
     }
 
 }

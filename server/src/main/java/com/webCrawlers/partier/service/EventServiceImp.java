@@ -31,12 +31,19 @@ public class EventServiceImp implements EventService {
     }
 
     @Override
+    public Set<Event> getAllFavoriteEventsForUser(Long userId) {
+//        return eventRepository.
+        return Set.copyOf(eventRepository.findAll().stream().filter(event -> !event.isApproved()).collect(Collectors.toSet()));
+    }
+
+    @Override
     public Event getEvent(Long id) {
         return eventRepository.findById(id).orElse(null);
     }
 
     @Override
     public void addEvent(Event event) {
+
         eventRepository.save(event);
     }
 

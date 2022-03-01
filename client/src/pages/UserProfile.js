@@ -1,5 +1,6 @@
 import Card from "../components/ui/Card";
-import UpdateUserFrom from "../components/layout/UpdateUserForm";
+import UpdateUserForm from "../components/layout/UpdateUserForm";
+import AddNewCardForm from "../components/layout/AddNewCardForm";
 
 function UserProfilePage() {
 
@@ -22,15 +23,20 @@ function UserProfilePage() {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/api/user/update/"+JSON.parse(localStorage.getItem("user")).id, requestOptions)
+        fetch("http://localhost:5000/api/user/update/" + JSON.parse(localStorage.getItem("user")).id, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
     }
 
+    async function AddCardHandler(cardDetails){
+        console.log("");
+    }
+
     return (
         <Card>
-            <UpdateUserFrom onUpdateUser={UpdateHandler}/>
+            <UpdateUserForm onUpdateUser={UpdateHandler}/>
+            <AddNewCardForm onAddCardHandler={AddCardHandler}/>
         </Card>
     )
 }

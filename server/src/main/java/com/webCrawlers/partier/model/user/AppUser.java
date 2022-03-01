@@ -1,5 +1,6 @@
 package com.webCrawlers.partier.model.user;
 
+import com.webCrawlers.partier.model.Card;
 import com.webCrawlers.partier.model.Event;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,9 +25,14 @@ public class AppUser {
     private String profilePhoto;
     private String password;
 
+    private String stripeCustomerId;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany()
     private Collection<Event> favoriteEvents = new ArrayList<>();
+
+    @OneToMany()
+    private Collection<Card> cards = new ArrayList<>();
 }
