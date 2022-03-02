@@ -7,7 +7,6 @@ import RefuseButton from "../event_buttons/RefuseButton";
 
 function EventItem(props) {
     const navigate = useNavigate();
-    // console.log(props);
     return (
         <div className={classes.item}>
             <div className={classes.image}  onClick={() => navigate(`/event/${props.event.id}`,{myJSON: props.event})}>

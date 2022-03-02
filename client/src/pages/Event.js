@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import classes from "./Event.module.css";
 import EventItem from "../components/events/EventItem";
 
 function EventPage() {

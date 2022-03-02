@@ -60,7 +60,7 @@ public class EventsController {
     }
 
     @GetMapping("/buy/{eventId}/{stripeUserId}/{paymentMethodId}")
-    public Set<Event> getAllFavoriteEventsForUser(@PathVariable String paymentMethodId, @PathVariable String stripeUserId) {
+    public void getTicket(@PathVariable String paymentMethodId, @PathVariable String stripeUserId, @PathVariable Long eventId) {
         PaymentIntent paymentIntent = createPaymentIntent(100, "USD", stripeUserId);
         PaymentIntent updatedPaymentIntent = StripeApi.tryToConfirmPayment(paymentIntent, paymentMethodId);
         if (updatedPaymentIntent.getStatus().equals("succeeded")) {
@@ -68,8 +68,5 @@ public class EventsController {
         } else {
             System.out.println(updatedPaymentIntent.getId());
         }
-        System.out.println("");
-        return null;
     }
-
 }
