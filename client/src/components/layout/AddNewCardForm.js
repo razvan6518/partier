@@ -9,6 +9,7 @@ function AddNewCardForm(props) {
     const [expMonth, setExpMonth] = useState("");
     const [CVV, setCVV] = useState("");
 
+    // TODO: add check for input (card number 12 digits, valid month year etc)
     // (function () {
     //     if (password !== "" && repeatPassword !== "") {
     //         const updateButton = document.querySelector("#updateButton");
@@ -29,7 +30,7 @@ function AddNewCardForm(props) {
             "cardNumber": cardNumber,
             "expYear": expYear,
             "expMonth": expMonth,
-            "CVV": CVV
+            "cvv": CVV
         };
         props.onAddCardHandler(cardDetails);
     }
@@ -59,7 +60,7 @@ function AddNewCardForm(props) {
                     <input type="number" className={`${classes.input}`} onChange={event => setCVV(event.target.value)}/>
                     <span className={`${classes.highlight}`}/>
                     <span className={`${classes.bar}`}/>
-                    <label className={`${classes.label}`}>Address:</label>
+                    <label className={`${classes.label}`}>CVC:</label>
                 </div>
             </form>
             <button id="updateButton" className={`${classes.button36}`} onClick={addCardHandler} role="button">Update</button>

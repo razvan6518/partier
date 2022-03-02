@@ -30,7 +30,27 @@ function UserProfilePage() {
     }
 
     async function AddCardHandler(cardDetails){
-        console.log("");
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "number": cardDetails.cardNumber,
+            "expYear": cardDetails.expYear,
+            "expMonth": cardDetails.expMonth,
+            "cvv": cardDetails.cvv
+        });
+
+        const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:5000/api/user/add-card/"+JSON.parse(localStorage.getItem("user")).username, requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
     }
 
     return (

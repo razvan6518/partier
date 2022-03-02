@@ -6,10 +6,7 @@ import com.stripe.model.Customer;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentMethod;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class StripeApi {
 
@@ -81,7 +78,7 @@ public class StripeApi {
         return updatedPaymentIntent;
     }
 
-    public static List<PaymentMethod> getPaymentMethodsByIds(List<String> paymentMethodsIds){
+    public static List<PaymentMethod> getPaymentMethodsByIds(Set<String> paymentMethodsIds){
         Stripe.apiKey = "sk_test_51KE7W8G8Vd74GxWdplerbvkihsXMkxu4Vab7z1rnsvsYW822n5mhn08r9dqpFi6FGJNdpmpeRqxAaEjGg7w0C3qY00tZ1NyFGX";
         List<PaymentMethod> result = new ArrayList<>();
         for (String paymentMethodId: paymentMethodsIds){

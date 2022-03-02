@@ -1,10 +1,10 @@
 package com.webCrawlers.partier.controller;
 
+import com.stripe.model.PaymentMethod;
 import com.webCrawlers.partier.model.Card;
 import com.webCrawlers.partier.model.CardDetails;
 import com.webCrawlers.partier.model.Event;
 import com.webCrawlers.partier.model.user.AppUser;
-import com.webCrawlers.partier.model.user.Role;
 import com.webCrawlers.partier.service.CardService;
 import com.webCrawlers.partier.service.UserService;
 import lombok.Data;
@@ -16,6 +16,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Set;
+
+import static com.webCrawlers.partier.util.StripeApi.getPaymentMethodsByIds;
 
 @RestController
 @RequiredArgsConstructor
@@ -58,21 +60,20 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.updateUser(user, id));
     }
 
-    @PostMapping("/role/save")
-    public ResponseEntity<Role> saveRole(@RequestBody Role role) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.saveRole(role));
-    }
-
     @PostMapping("/event/favorites")
     public ResponseEntity<?> addToFavorites(@RequestBody EventToUserForm eventToUserForm) {
         userService.addEventToFavorites(eventToUserForm.getUsername(), eventToUserForm.getEventId());
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/cards/{username}")
+    public List<CardDetails> getCardsForUser(@PathVariable String username) {
+//        userService.getCardsForUser(username);
+        return userService.getCardsForUser(username);
+    }
+
     @GetMapping("/event/favorites/{username}")
     public Set<Event> getFavoritesForUser(@PathVariable String username) {
-        userService.getAllFavoriteEventsForUser(username);
         return userService.getAllFavoriteEventsForUser(username);
     }
 
@@ -80,7 +81,6 @@ public class UserController {
     public ResponseEntity<?> addCardToUser(@RequestBody CardDetails cardDetails, @PathVariable String username) {
         String stripePaymentMethodId = userService.generatePaymentMethodId(cardDetails, String.valueOf(username));
         Long id = cardService.addCard(new Card(null, stripePaymentMethodId));
-        System.out.println("");
         userService.addCard(username, id);
         return ResponseEntity.ok().build();
     }

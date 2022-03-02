@@ -1,11 +1,15 @@
 package com.webCrawlers.partier.controller;
 
+import com.stripe.model.PaymentIntent;
 import com.webCrawlers.partier.model.Event;
 import com.webCrawlers.partier.service.EventServiceImp;
+import com.webCrawlers.partier.util.StripeApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
+
+import static com.webCrawlers.partier.util.StripeApi.createPaymentIntent;
 
 @RestController
 @RequestMapping("/events")
@@ -36,7 +40,6 @@ public class EventsController {
 
     @PostMapping
     public void addEvent(@RequestBody Event event) {
-
         eventService.addEvent(event);
     }
 
@@ -54,6 +57,19 @@ public class EventsController {
     @GetMapping("/favorites/{userId}")
     public Set<Event> getAllFavoriteEventsForUser(@PathVariable Long userId) {
         return eventService.getAllFavoriteEventsForUser(userId);
+    }
+
+    @GetMapping("/buy/{eventId}/{stripeUserId}/{paymentMethodId}")
+    public Set<Event> getAllFavoriteEventsForUser(@PathVariable String paymentMethodId, @PathVariable String stripeUserId) {
+        PaymentIntent paymentIntent = createPaymentIntent(100, "USD", stripeUserId);
+        PaymentIntent updatedPaymentIntent = StripeApi.tryToConfirmPayment(paymentIntent, paymentMethodId);
+        if (updatedPaymentIntent.getStatus().equals("succeeded")) {
+            System.out.println(updatedPaymentIntent.getId());
+        } else {
+            System.out.println(updatedPaymentIntent.getId());
+        }
+        System.out.println("");
+        return null;
     }
 
 }

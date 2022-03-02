@@ -1,13 +1,12 @@
 package com.webCrawlers.partier.service;
 
+import com.stripe.model.PaymentMethod;
 import com.webCrawlers.partier.model.Card;
 import com.webCrawlers.partier.model.CardDetails;
 import com.webCrawlers.partier.model.Event;
 import com.webCrawlers.partier.model.user.AppUser;
-import com.webCrawlers.partier.model.user.Role;
 import com.webCrawlers.partier.repository.CardRepository;
 import com.webCrawlers.partier.repository.EventRepository;
-import com.webCrawlers.partier.repository.RoleRepo;
 import com.webCrawlers.partier.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +24,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import static com.webCrawlers.partier.util.StripeApi.createCustomer;
-import static com.webCrawlers.partier.util.StripeApi.createPaymentMethod;
-import static com.webCrawlers.partier.util.StripeApi.attachesPaymentMethodToCustomer;
+import static com.webCrawlers.partier.util.StripeApi.*;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +35,6 @@ import static com.webCrawlers.partier.util.StripeApi.attachesPaymentMethodToCust
 public class UserServiceImp implements UserService, UserDetailsService {
 
     private final UserRepo userRepo;
-    private final RoleRepo roleRepo;
     private final EventRepository eventRepo;
     private final CardRepository cardRepository;
     private final PasswordEncoder bCryptPasswordEncoder;
@@ -58,10 +55,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
         return userRepo.save(appUser);
     }
 
-    @Override
-    public Role saveRole(Role role) {
-        return roleRepo.save(role);
-    }
 
     @Override
     public AppUser updateUser(AppUser user, long id) {
@@ -106,6 +99,22 @@ public class UserServiceImp implements UserService, UserDetailsService {
         userRepo.save(appUser);
     }
 
+    @Override
+    public List<CardDetails> getCardsForUser(String username) {
+        AppUser user = userRepo.findByUsername(username);
+        Set<String> cardsIds = Set.copyOf(user.getCards().stream().map(card -> card.getStripeCardId()).collect(Collectors.toSet()));
+        List<PaymentMethod> paymentMethods = getPaymentMethodsByIds(cardsIds);
+        List<CardDetails> cards = new ArrayList<>();
+        for (PaymentMethod paymentMethod : paymentMethods){
+            cards.add(new CardDetails(paymentMethod.getId(),
+                    null,
+                    Integer.parseInt(String.valueOf(paymentMethod.getCard().getExpYear())),
+                    Integer.parseInt(String.valueOf(paymentMethod.getCard().getExpMonth())),
+                    0));
+        }
+        return cards;
+    }
+
 
     @Override
     public String generatePaymentMethodId(CardDetails cardDetails, String username) {
@@ -120,5 +129,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
     public Set<Event> getAllFavoriteEventsForUser(String username) {
         return Set.copyOf(userRepo.findByUsername(username).getFavoriteEvents());
     }
+
+
 
 }

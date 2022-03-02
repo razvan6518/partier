@@ -5,7 +5,7 @@ import BuyTicketButton from "../event_buttons/BuyTicketButton";
 import ToFavoriteButton from "../event_buttons/ToFavoriteButton";
 import RefuseButton from "../event_buttons/RefuseButton";
 
-function MeetupItem(props) {
+function EventItem(props) {
     const navigate = useNavigate();
     // console.log(props);
     return (
@@ -16,7 +16,7 @@ function MeetupItem(props) {
             <div className={classes.content} onClick={() => navigate(`/event/${props.event.id}`)}>
                 <h3>{props.event.title}</h3>
                 <address>{props.event.location}</address>
-                <p>{truncateWithEllipses(props.event.description, 200).toUpperCase()}</p>
+                <p>{props.event.description}</p>
             </div>
             <div className={classes.actions}>
                 {props.approve != null &&
@@ -30,7 +30,7 @@ function MeetupItem(props) {
                     />
                 }
                 {props.buyTicket != null &&
-                    <BuyTicketButton/>
+                    <BuyTicketButton eventId={props.event.id}/>
                 }
                 {props.toFavorites != null &&
                     <ToFavoriteButton eventId={props.event.id}/>
@@ -40,11 +40,11 @@ function MeetupItem(props) {
     );
 }
 
-export default MeetupItem;
+export default EventItem;
 
-function truncateWithEllipses(text, max) {
-    if (text === null) {
-        return "";
-    }
-    return text.substr(0, max - 1) + (text.length > max ? '...' : '');
-}
+// function truncateWithEllipses(text, max) {
+//     if (text === null) {
+//         return "";
+//     }
+//     return text.substr(0, max - 1) + (text.length > max ? '...' : '');
+// }
