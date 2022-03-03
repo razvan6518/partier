@@ -63,7 +63,7 @@ function AddNewCardForm(props) {
                     <label className={`${classes.label}`}>CVC:</label>
                 </div>
             </form>
-            <button id="updateButton" className={`${classes.button36}`} onClick={addCardHandler} role="button">Update</button>
+            <button id="updateButton" className={`${classes.button36}`} onClick={addCardHandler} role="button">Add Card</button>
         </div>
     )
 }

@@ -3,6 +3,7 @@ import classes from './NavigationBar.module.css'
 import {useEffect, useState} from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import {Button} from "@chakra-ui/react";
 
 function NavigationBar() {
 
