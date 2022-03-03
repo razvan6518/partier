@@ -1,7 +1,9 @@
+import Card from "../components/ui/Card";
+import UpdateUserFrom from "../components/layout/UpdateUserForm";
 import {useEffect, useState} from "react";
 import EventItem from "../components/events/EventItem";
 
-function ManageEvents() {
+function UserFavorites() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadedEvents, setLoadedEvents] = useState([]);
@@ -13,11 +15,8 @@ function ManageEvents() {
     useEffect(() => {
         setIsLoading(true);
 
-
         const myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer " + localStorage.getItem("token"));
-
-        sessionStorage.getItem("token");
+        // myHeaders.append("Authorization", "Bearer " + localStorage.getItem("token"));
 
         const requestOptions = {
             method: 'GET',
@@ -56,7 +55,6 @@ function ManageEvents() {
     return (
         <section>
             {loadedEvents.map(event => <EventItem event={event}
-                                                  approve={true}
                                                   unapprove={true}
                                                   removeEventFromLoadedEvents={removeEventFromLoadedEvents}
             />)}
@@ -64,5 +62,4 @@ function ManageEvents() {
     );
 }
 
-export default ManageEvents;
-
+export default UserFavorites;

@@ -1,9 +1,13 @@
 package com.webCrawlers.partier.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.webCrawlers.partier.model.user.AppUser;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 @Getter
@@ -30,6 +34,6 @@ public class Event {
     private String category;
     private boolean approved;
 
-//    private Set<String> artists;
-
+    @ManyToMany
+    private Collection<AppUser> likedEvents = new ArrayList<>();
 }
