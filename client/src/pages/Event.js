@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
-import classes from "./Event.module.css";
+import {useParams} from "react-router-dom";
+import EventItem from "../components/events/EventItem";
 
 function EventPage() {
     const params = useParams();
 
-    if (localStorage.getItem("token") == null){
+    if (localStorage.getItem("token") == null) {
         window.location.replace("/login");
     }
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadedEvent, setLoadedEvent] = useState("");
-        console.log(localStorage.getItem("token"));
+    console.log(localStorage.getItem("token"));
     useEffect(async () => {
         setIsLoading(true);
         fetch(
@@ -33,21 +33,8 @@ function EventPage() {
     }
 
     return (
-        <div className={classes.card}>
-            <div className={classes.image}>
-                <img src={loadedEvent.image} alt={loadedEvent.title}/>
-            </div>
-            <div className={classes.content}>
-                <h3>{loadedEvent.title}</h3>
-                <p>{loadedEvent.start_date}</p>
-                <address>{loadedEvent.location}</address>
-                <p>{loadedEvent.description}</p>
-                <div className={classes.actions}>
-                    <button>To Favorites</button>
-                    <button>Buy Ticket</button>
-                </div>
-            </div>
-        </div>
+        <EventItem event={loadedEvent}
+                   buyTicket={true}/>
     );
 
 }

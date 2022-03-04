@@ -21,11 +21,6 @@ function AllEventsPage() {
             redirect: 'follow'
         };
 
-        // fetch("http://localhost:5000/events", requestOptions)
-        //     .then(response => response.text())
-        //     .then(result => console.log(result))
-        //     .catch(error => console.log('error', error));
-
         fetch(
             "http://localhost:5000/events/approved", requestOptions
         ).then(response => {

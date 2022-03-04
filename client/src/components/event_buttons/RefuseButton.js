@@ -1,3 +1,4 @@
+// TODO: change name !
 function ApproveButton(props) {
 
     function refuseHandler(){

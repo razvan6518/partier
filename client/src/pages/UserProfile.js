@@ -90,5 +90,4 @@ function UserProfilePage() {
         </Card>
     )
 }
-
 export default UserProfilePage;

@@ -17,4 +17,6 @@ public interface EventService {
     Boolean approveEvent(Long id);
 
     void deleteEvent(Long id);
+
+    Set<Event> getAllFavoriteEventsForUser(Long userId);
 }
