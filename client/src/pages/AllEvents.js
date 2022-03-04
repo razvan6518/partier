@@ -36,6 +36,7 @@ function AllEventsPage() {
             }
 
             setIsLoading(false);
+            console.log("is loading " + isLoading);
             console.log("loaded events");
             setLoadedEvents(events);
         });

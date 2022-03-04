@@ -1,17 +1,56 @@
 import Card from "../components/ui/Card";
-import UpdateUserForm from "../components/layout/UpdateUserForm";
-import AddNewCardForm from "../components/layout/AddNewCardForm";
-import {useToast} from "@chakra-ui/react";
+import classes from "./UserProfile.module.css";
+import UpdateUserFrom from "../components/layout/UpdateUserForm";
+import {useEffect, useState} from "react";
 
 function UserProfilePage() {
 
-    const toast = useToast();
+    const [selectedImage, setSelectedImage] = useState(undefined);
+    const [selectedImageURL, setSelectedImageURL] = useState(undefined);
+    const [currentImage, setCurrentImage] = useState();
+
+    useEffect(() => {
+        fetch("/getProfilePic/" + JSON.parse(localStorage.getItem("user")).id)
+            .then(response => response.blob())
+            .then(imageBlob => {
+                console.log("img blob " + imageBlob);
+                console.log("url " + URL.createObjectURL(imageBlob));
+                setSelectedImageURL(URL.createObjectURL(imageBlob));
+
+            })
+    }, [])
+
+    console.log("selected " + selectedImageURL);
+
+    function handleProfilePicChange(event) {
+        console.log(event.target.files[0]);
+        setSelectedImage(event.target.files[0]);
+        setSelectedImageURL(URL.createObjectURL(selectedImage));
+
+        const headers = new Headers();
+        headers.append("Content-Type", "multipart/form-data");
+
+        const formData = new FormData();
+        formData.append("file", selectedImage, JSON.parse(localStorage.getItem("user")).id);
+
+        const requestOptions = {
+            method: 'POST',
+            body: formData,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:5000/api/uploadPicture", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+    }
 
     async function UpdateHandler(user) {
-        let myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
 
-        let raw = JSON.stringify({
+        const raw = JSON.stringify({
             "address": user.address,
             "firstName": user.firstName,
             "lastName": user.lastName,
@@ -19,71 +58,36 @@ function UserProfilePage() {
             "email": user.email
         });
 
-        let requestOptions = {
+        const requestOptions = {
             method: 'POST',
-            headers: myHeaders,
+            headers: headers,
             body: raw,
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/api/user/update/" + JSON.parse(localStorage.getItem("user")).id, requestOptions)
+        fetch("http://localhost:5000/api/user/update/"+ JSON.parse(localStorage.getItem("user")).id, requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
     }
 
-    async function AddCardHandler(cardDetails) {
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        const raw = JSON.stringify({
-            "number": cardDetails.cardNumber,
-            "expYear": cardDetails.expYear,
-            "expMonth": cardDetails.expMonth,
-            "cvv": cardDetails.cvv
-        });
-
-        const requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch("http://localhost:5000/api/user/add-card/" + JSON.parse(localStorage.getItem("user")).username, requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                if (result === "")
-                    toast({
-                        title: 'Card added approved.',
-                        description: "",
-                        status: 'success',
-                        duration: 3000,
-                        isClosable: true,
-                    })
-                else {
-                    toast({
-                        title: 'Invalid Card details.',
-                        description: "",
-                        status: 'error',
-                        duration: 3000,
-                        isClosable: true,
-                    })
-                }
-            })
-            .catch(error => console.log('error', error));
-    }
-
     return (
         <Card>
-            <table>
-                <tr>
-                    <td><UpdateUserForm onUpdateUser={UpdateHandler}/></td>
-                    <td><AddNewCardForm onAddCardHandler={AddCardHandler}/></td>
-                </tr>
-            </table>
+            <div className={classes.imgContainer}>
+                <img src={selectedImageURL} onClick={console.log("selected1 " + selectedImageURL)}/>
+                <form>
+                    <input
+                        type="file"
+                        name="profilePic"
+                        onChange={handleProfilePicChange}
+                    />
+                </form>
+            </div>
+            <div>
+                <h3 className={classes.name}>Nume</h3>
+            </div>
+            <UpdateUserFrom onUpdateUser={UpdateHandler}/>
         </Card>
     )
 }
-
 export default UserProfilePage;
