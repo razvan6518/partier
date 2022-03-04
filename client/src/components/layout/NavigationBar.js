@@ -29,11 +29,9 @@ function NavigationBar() {
 
     return (
         <header className={classes.header}>
+            <div className={classes.logo}><Link to='/'><h1>Partier</h1></Link></div>
             <nav id="nav">
                 <ul>
-                    <li>
-                        <Link to='/'><h1>Partier</h1></Link>
-                    </li>
                     {username != null &&
                         <li>
                             <h4>Welcome {username}</h4>
