@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 function UserProfilePage() {
 
     const [selectedImage, setSelectedImage] = useState(undefined);
-    const [selectedImageURL, setSelectedImageURL] = useState(undefined);
+    const [selectedImageURL, setSelectedImageURL] = useState("https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png");
     const [currentImage, setCurrentImage] = useState();
 
     useEffect(() => {
@@ -75,18 +75,22 @@ function UserProfilePage() {
         <Card>
             <div className={classes.imgContainer}>
                 <img src={selectedImageURL} onClick={console.log("selected1 " + selectedImageURL)}/>
-                <form>
+            </div>
+            <div>
+                {/*<h3 className={classes.name}>{JSON.parse(localStorage.getItem("user")).username.upper}</h3>*/}
+
+            </div>
+            <div className={classes.formContainer}>
+                <form className={classes.form}>
                     <input
                         type="file"
                         name="profilePic"
                         onChange={handleProfilePicChange}
                     />
                 </form>
+                <UpdateUserFrom onUpdateUser={UpdateHandler}/>
             </div>
-            <div>
-                <h3 className={classes.name}>Nume</h3>
-            </div>
-            <UpdateUserFrom onUpdateUser={UpdateHandler}/>
+
         </Card>
     )
 }

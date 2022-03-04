@@ -42,7 +42,7 @@
 .input:focus ~ .label, .input:valid ~ .label {
     top: -20px;
     font-size: 14px;
-    color: #5264AE;
+    color: #cc2062;
 }
 
 /* BOTTOM BARS ================================= */
@@ -58,7 +58,7 @@
     width: 0;
     bottom: 1px;
     position: absolute;
-    background: #5264AE;
+    background: #cc2062;
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
@@ -91,7 +91,7 @@
 /* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {
     from {
-        background: #5264AE;
+        background: #cc2062;
     }
     to {
         width: 0;
@@ -101,7 +101,7 @@
 
 @-moz-keyframes inputHighlighter {
     from {
-        background: #5264AE;
+        background: #cc2062;
     }
     to {
         width: 0;
@@ -111,7 +111,7 @@
 
 @keyframes inputHighlighter {
     from {
-        background: #5264AE;
+        background: #cc2062;
     }
     to {
         width: 0;
@@ -123,7 +123,7 @@
 
 /* CSS */
 .button36 {
-    background-image: linear-gradient(92.88deg, #134670 9.16%, #134670 43.89%, #134670 64.72%);
+    background-image: linear-gradient(92.88deg, #cc2062 9.16%, #cc2062 43.89%, #cc2062 64.72%);
     border-radius: 8px;
     border-style: none;
     box-sizing: border-box;

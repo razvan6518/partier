@@ -34,12 +34,7 @@ function NavigationBar() {
                 <ul>
                     {username != null &&
                         <li>
-                            <h4>Welcome {username}</h4>
-                        </li>
-                    }
-                    {username != null &&
-                        <li>
-                            <Link to='/profile'>Profile</Link>
+                            <h2><Link to='/profile'>Welcome {username}</Link></h2>
                         </li>
                     }
                     {username != null &&
