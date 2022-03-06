@@ -2,8 +2,12 @@ import Card from "../components/ui/Card";
 import classes from "./UserProfile.module.css";
 import UpdateUserFrom from "../components/layout/UpdateUserForm";
 import {useEffect, useState} from "react";
+import AddNewCardForm from "../components/layout/AddNewCardForm";
+import {useToast} from "@chakra-ui/react";
 
 function UserProfilePage() {
+
+    const toast = useToast();
 
     const [selectedImage, setSelectedImage] = useState(undefined);
     const [selectedImageURL, setSelectedImageURL] = useState("https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png");
@@ -21,6 +25,48 @@ function UserProfilePage() {
     }, [])
 
     console.log("selected " + selectedImageURL);
+
+    async function AddCardHandler(cardDetails) {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "number": cardDetails.cardNumber,
+            "expYear": cardDetails.expYear,
+            "expMonth": cardDetails.expMonth,
+            "cvv": cardDetails.cvv
+        });
+
+        const requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:5000/api/user/add-card/" + JSON.parse(localStorage.getItem("user")).username, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                if (result === "")
+                    toast({
+                        title: 'Card added approved.',
+                        description: "",
+                        status: 'success',
+                        duration: 3000,
+                        isClosable: true,
+                    })
+                else {
+                    toast({
+                        title: 'Invalid Card details.',
+                        description: "",
+                        status: 'error',
+                        duration: 3000,
+                        isClosable: true,
+                    })
+                }
+            })
+            .catch(error => console.log('error', error));
+    }
 
     function handleProfilePicChange(event) {
         console.log(event.target.files[0]);
@@ -90,6 +136,7 @@ function UserProfilePage() {
                 </form>
                 <UpdateUserFrom onUpdateUser={UpdateHandler}/>
             </div>
+            <div><AddNewCardForm onAddCardHandler={AddCardHandler}/></div>
 
         </Card>
     )
