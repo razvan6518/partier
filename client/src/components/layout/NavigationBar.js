@@ -1,9 +1,9 @@
 import {Link} from 'react-router-dom';
-import classes from './NavigationBar.module.css'
+import classes from './style/NavigationBar.module.css'
 import {useEffect, useState} from "react";
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
 import {Button} from "@chakra-ui/react";
+import LoginDrawer from "./LoginDrawer";
+import RegisterDrawer from "./RegisterDrawer";
 
 function NavigationBar() {
 
@@ -50,23 +50,11 @@ function NavigationBar() {
                     }
                     {username == null &&
                         <li>
-                            <button onClick={() => {
-                                setShowRegister(true);
-                                setShowLogin(false);
-                            }}>
-                                Register
-                            </button>
-                            <RegisterForm onClose={() => setShowRegister(false)} show={showRegister}/>
+                            <RegisterDrawer/>
                         </li>}
                     {username == null &&
                         <li>
-                            <button onClick={() => {
-                                setShowLogin(true);
-                                setShowRegister(false);
-                            }}>
-                                Login
-                            </button>
-                            <LoginForm onClose={() => setShowLogin(false)} show={showLogin}/>
+                            <LoginDrawer/>
                         </li>
                     }
                     {role == 'ROLE_ORGANISER' &&

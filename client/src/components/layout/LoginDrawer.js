@@ -1,7 +1,19 @@
 import {useRef} from "react";
-import "./Login.css";
+import React from "react";
 
-function LoginForm(props) {
+import {
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton, useDisclosure, Button, Input,
+} from '@chakra-ui/react'
+
+
+function LoginDrawer() {
+
     const usernameInputRef = useRef();
     const passwordInputRef = useRef();
 
@@ -62,36 +74,40 @@ function LoginForm(props) {
         LoginHandler(userItem);
     }
 
-    if (!props.show) {
-        return null;
-    }
+    const {isOpen, onOpen, onClose} = useDisclosure()
+    const btnRef = React.useRef()
 
-    return (<>
-            <div className="login-box">
-                <h2>Login</h2>
-                <form>
-                    <div className="user-box">
-                        <input type="text" name="" required="" ref={usernameInputRef}/>
-                        <label>Username</label>
-                    </div>
-                    <div className="user-box">
-                        <input type="password" name="" required="" ref={passwordInputRef}/>
-                        <label>Password</label>
-                    </div>
-                    <a href="#" onClick={submitHandler}>
-                        <span/>
-                        <span/>
-                        <span/>
-                        <span/>
-                        Submit
-                    </a>
-                    <a href="#" onClick={props.onClose}>
-                        X
-                    </a>
-                </form>
-            </div>
+    return (
+        <>
+            <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+                Log In
+            </Button>
+            <Drawer
+                isOpen={isOpen}
+                placement='right'
+                onClose={onClose}
+                finalFocusRef={btnRef}
+            >
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerCloseButton/>
+                    <DrawerHeader>Sign In</DrawerHeader>
+
+                    <DrawerBody>
+                        <Input placeholder='Username' ref={usernameInputRef}/>
+                        <Input type="password" placeholder='Password' ref={passwordInputRef}/>
+                    </DrawerBody>
+
+                    <DrawerFooter>
+                        <Button variant='outline' mr={3} onClick={onClose}>
+                            Cancel
+                        </Button>
+                        <Button colorScheme='blue' onClick={submitHandler}>Log In</Button>
+                    </DrawerFooter>
+                </DrawerContent>
+            </Drawer>
         </>
     )
 }
 
-export default LoginForm;
+export default LoginDrawer;

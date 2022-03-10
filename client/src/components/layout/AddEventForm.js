@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import {useState} from "react";
 
 import Card from "../ui/Card";
-import classes from "./LoginForm.module.css";
 
 
 function AddEventForm(props) {
@@ -33,39 +32,39 @@ function AddEventForm(props) {
 
     // TODO: redirect after add event, add filters, add css
     return (<Card>
-        <form className={classes.form} onSubmit={submitHandler}>
-            <div className={classes.control}>
+        <form  onSubmit={submitHandler}>
+            <div >
                 <label htmlFor="title">Title</label>
                 <input type="text" required id="title" onChange={event => setTitle(event.target.value)}/>
             </div>
-            <div className={classes.control}>
+            <div >
                 <label htmlFor="description">Description</label>
                 <input type="text" required id="description" onChange={event => setDescription(event.target.value)}/>
             </div>
-            <div className={classes.control}>
+            <div >
                 <label htmlFor="location">Location</label>
                 <input type="text" required id="location" onChange={event => setLocation(event.target.value)}/>
             </div>
-            <div className={classes.control}>
+            <div >
                 <label htmlFor="startDate">Start Date</label>
                 <DatePicker selected={startDate} onChange={event => setStartDate(event)} />
             </div>
-            <div className={classes.control}>
+            <div >
                 <label htmlFor="endDate">End Date</label>
                 <DatePicker selected={endDate} onChange={event => setEndDate(event)} />
             </div>
-            <div className={classes.control}>
+            <div >
                 <label htmlFor="image">Image</label>
                 <input type="text" required id="image" onChange={event => setImage(event.target.value)}/>
             </div>
-            <div className={classes.control}>
+            <div >
                 <label htmlFor="category">Choose a role:</label>
                 <select name="category" id="category" onChange={event => setCategory(event.target.value)}>
                     <option value="festival">festival</option>
                     {/*<option value="ROLE_ORGANISER">Organiser</option>*/}
                 </select>
             </div>
-            <div className={classes.actions}>
+            <div >
                 <button>Add Event</button>
             </div>
         </form>
