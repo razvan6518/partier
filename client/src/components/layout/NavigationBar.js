@@ -32,6 +32,16 @@ function NavigationBar() {
             <div className={classes.logo}><Link to='/'><h1>Partier</h1></Link></div>
             <nav id="nav">
                 <ul>
+                    {role == 'ROLE_ORGANISER' &&
+                    <li>
+                        <Link to='/add-event'>Add Event</Link>
+                    </li>
+                    }
+                    {role == 'ROLE_ADMIN' &&
+                    <li>
+                        <Link to='/manage-events'>Manage Events</Link>
+                    </li>
+                    }
                     {username != null &&
                         <li>
                             <h2><Link to='/profile'>Welcome {username}</Link></h2>
@@ -43,8 +53,10 @@ function NavigationBar() {
                                 localStorage.clear();
                                 setUser(null);
                                 window.location.href = '/';
-                            }}>
+                            }}><h1>
                                 Log Out
+                            </h1>
+
                             </button>
                         </li>
                     }
@@ -69,16 +81,7 @@ function NavigationBar() {
                             <LoginForm onClose={() => setShowLogin(false)} show={showLogin}/>
                         </li>
                     }
-                    {role == 'ROLE_ORGANISER' &&
-                        <li>
-                            <Link to='/add-event'>Add Event</Link>
-                        </li>
-                    }
-                    {role == 'ROLE_ADMIN' &&
-                        <li>
-                            <Link to='/manage-events'>Manage Events</Link>
-                        </li>
-                    }
+
                 </ul>
             </nav>
         </header>
