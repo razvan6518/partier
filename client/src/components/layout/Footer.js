@@ -1,4 +1,4 @@
-import classes from './Footer.module.css';
+import classes from './style/Footer.module.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 function FooterPage() {

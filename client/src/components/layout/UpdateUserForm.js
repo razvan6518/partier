@@ -1,5 +1,5 @@
 import "react-datepicker/dist/react-datepicker.css";
-import classes from "./UpdateUser.module.css";
+import classes from "./style/UpdateUser.module.css";
 import {useState} from "react";
 
 function UpdateUserForm(props) {

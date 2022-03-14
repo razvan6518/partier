@@ -65,14 +65,15 @@ function ApproveButton(props) {
                     };
                     const option = {
                         value: card.sptripePaymentMethodId,
-                        label: card.brand
+                        label: card.brand,
+                        expYear: card.expYear
                     }
                     op.push(option);
 
                 }
 
                 setOptions(op);
-                console.log("options ", options);
+                // console.log("options ", options);
 
             })
             .catch(error => console.log('error', error));
@@ -87,7 +88,7 @@ function ApproveButton(props) {
 
                     for (let option of options) {
                         console.log("jsx " + typeof (option.value));
-                        optionsJSX.push(<option value={option.value}>{option.label}</option>);
+                        optionsJSX.push(<option value={option.value}>{option.label} {option.expYear}</option>);
                     }
 
                     return optionsJSX;
