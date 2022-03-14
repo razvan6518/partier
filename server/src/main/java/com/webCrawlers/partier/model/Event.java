@@ -6,9 +6,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
@@ -36,4 +34,7 @@ public class Event {
 
     @ManyToMany
     private Collection<AppUser> likedEvents = new ArrayList<>();
+
+    @OneToMany
+    private Set<TicketOrder> orders = new HashSet<>();
 }

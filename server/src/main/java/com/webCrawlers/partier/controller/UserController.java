@@ -92,7 +92,6 @@ public class UserController {
 
     @GetMapping("/cards/{username}")
     public List<CardDetails> getCardsForUser(@PathVariable String username) {
-//        userService.getCardsForUser(username);
         return userService.getCardsForUser(username);
     }
 
@@ -142,4 +141,6 @@ class EventToUserForm {
     private String username;
     private Long eventId;
 }
+
+
 

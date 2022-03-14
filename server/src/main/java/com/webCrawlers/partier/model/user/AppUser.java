@@ -2,14 +2,13 @@ package com.webCrawlers.partier.model.user;
 
 import com.webCrawlers.partier.model.Card;
 import com.webCrawlers.partier.model.Event;
+import com.webCrawlers.partier.model.TicketOrder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
 public class AppUser {
@@ -30,9 +29,12 @@ public class AppUser {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
-    @ManyToMany()
+    @ManyToMany
     private Collection<Event> favoriteEvents = new ArrayList<>();
 
-    @OneToMany()
+    @OneToMany
     private Collection<Card> cards = new ArrayList<>();
+
+    @OneToMany
+    private Set<TicketOrder> orders = new HashSet<>();
 }

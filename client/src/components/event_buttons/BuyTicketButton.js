@@ -23,11 +23,11 @@ function ApproveButton(props) {
             method: 'GET',
             redirect: 'follow'
         };
-
-        fetch("http://localhost:5000/events/buy/" + props.eventId + "/" + user.stripeCustomerId + "/" + selectedCardId, requestOptions)
+        console.log("user id is " + user.id);
+        fetch("http://localhost:5000/events/buy/" + user.id + "/" + props.eventId + "/" + user.stripeCustomerId + "/" + selectedCardId, requestOptions)
             .then(response => response.text())
             .then(result => {
-                if (result === "")
+                if (result !== "failed")
                     toast({
                         title: 'Payment approved.',
                         description: "",

@@ -1,8 +1,12 @@
 package com.webCrawlers.partier.controller;
 
+import com.stripe.model.Order;
 import com.stripe.model.PaymentIntent;
 import com.webCrawlers.partier.model.Event;
-import com.webCrawlers.partier.service.EventServiceImp;
+//import com.webCrawlers.partier.model.Order;
+import com.webCrawlers.partier.model.TicketOrder;
+import com.webCrawlers.partier.service.*;
+//import com.webCrawlers.partier.service.OrderServiceImp;
 import com.webCrawlers.partier.util.StripeApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +21,14 @@ import static com.webCrawlers.partier.util.StripeApi.createPaymentIntent;
 public class EventsController {
 
     EventServiceImp eventService;
+    TicketOrderServiceImp orderService;
+    UserServiceImp userService;
 
     @Autowired
-    public EventsController(EventServiceImp es) {
+    public EventsController(EventServiceImp es, TicketOrderServiceImp tos, UserServiceImp us) {
         this.eventService = es;
+        this.orderService = tos;
+        this.userService = us;
     }
 
     @GetMapping("/{id}")
@@ -59,14 +67,22 @@ public class EventsController {
         return eventService.getAllFavoriteEventsForUser(userId);
     }
 
-    @GetMapping("/buy/{eventId}/{stripeUserId}/{paymentMethodId}")
-    public void getTicket(@PathVariable String paymentMethodId, @PathVariable String stripeUserId, @PathVariable Long eventId) {
+    @GetMapping("/buy/{userId}/{eventId}/{stripeUserId}/{paymentMethodId}")
+    public String getTicket(@PathVariable Long userId, @PathVariable String paymentMethodId, @PathVariable String stripeUserId, @PathVariable Long eventId) {
         PaymentIntent paymentIntent = createPaymentIntent(100, "USD", stripeUserId);
         PaymentIntent updatedPaymentIntent = StripeApi.tryToConfirmPayment(paymentIntent, paymentMethodId);
         if (updatedPaymentIntent.getStatus().equals("succeeded")) {
-            System.out.println(updatedPaymentIntent.getId());
+            System.out.println("payment success");
+            // create order
+            TicketOrder ticketOrder = TicketOrder.builder().build();
+            ticketOrder.setDescription("this is a ticket");
+            System.out.println("user id is ..." + userId);
+            ticketOrder.setUser(userService.getUser(userId));
+            ticketOrder.setEvent(eventService.getEvent(eventId));
+            orderService.addOrder(ticketOrder);
+            return updatedPaymentIntent.getId();
         } else {
-            System.out.println(updatedPaymentIntent.getId());
+            return "failed";
         }
     }
 }
