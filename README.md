@@ -1,35 +1,29 @@
 # CODECOOL SHOP
 
-**Team project:**  1 programmer (2 sprints * 4 work days)
+**Team project:**  2 programmers ( 4 sprints * 4 work days)
 
-**Technology/Language used:** Java + HTML + CSS
+**Technology/Language used:** Java + String Boot + React
 
 <img src="images\technologies.png" title="Technologies used">
 
-
-## Client [school] requirements:
-
-Use the **DAO design pattern** in Java.
-
-**PostgreSQL** for database.
-
-
 ## Description:
 
-**Codecool shop** is an online shop where you can select the desired items by certain criteria (price range,
-retailer, brand), add them to your cart and continue shopping, checkout and payments.
+**Partier** is an event website which can host different type of events. You can register either as a
+Customer (buying tickets, tagging events as favorites), as an Organizer posting new
+events, pending approval by a third party, which is the Admin.
 
 ## Usage and Features samples
 
 
 
-* Not being logged in you can see and filter the products
+* Not being logged in you can see events that are posted
 
 <img src="images\scr1.png" title="Browse and Filter Products">
 
-
-
-* Being logged in you can add products to the cart, then you can order them and pay.
-* From the cart you can edit the number of products ordered, or remove them from the cart.
+* After register and log in you have option in profile page to change your account details, to add payment method, to add events to favorites and to buy ticket to a event.
 
 <img src="images\src2.png" title="Register and Login">
+
+* After organiser post a new event, the details of the new event will appear in the admin Manage events page where he can approve or refuse the event.
+
+<img src="images\src3.png" title="Register and Login">
