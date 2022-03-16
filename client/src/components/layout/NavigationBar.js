@@ -53,10 +53,8 @@ function NavigationBar() {
                                 localStorage.clear();
                                 setUser(null);
                                 window.location.href = '/';
-                            }}><h1>
+                            }}>
                                 Log Out
-                            </h1>
-
                             </button>
                         </li>
                     }
