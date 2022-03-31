@@ -1,4 +1,4 @@
-# CODECOOL SHOP
+# PARTIER
 
 **Team project:**  2 programmers ( 4 sprints * 4 work days)
 
