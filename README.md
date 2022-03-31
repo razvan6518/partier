@@ -11,6 +11,9 @@
 **Partier** is an event website which can host different type of events. You can register either as a
 Customer (buying tickets, tagging events as favorites), as an Organizer posting new
 events, pending approval by a third party, which is the Admin.
+Every user have a profile page where he can upload a profile picture or change name, password, email address or address.
+All Customers have option to add new card details for payment.
+Organisers have Manage events page where they can see see how many tickets they sold.
 
 ## Usage and Features samples
 
